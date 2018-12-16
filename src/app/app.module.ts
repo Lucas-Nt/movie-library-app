@@ -4,14 +4,13 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { SharedModule } from './shared/shared.module';
 import { CoreModule } from './core/core.module';
-import { Routes, RouterModule } from '@angular/router';
+import { RouterModule } from '@angular/router';
 import { FavouriteMoviesComponent } from './components/favourite-movies/favourite-movies.component';
+import { APP_ROUTES } from './app.routes';
+import { ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { SearchMoviesModule } from './components/search/search-movies.module';
 
-
-const routes: Routes = [
-  // { path: '', component: FavouriteMoviesComponent },
-  { path: 'favourites', component: FavouriteMoviesComponent }
-];
 
 @NgModule({
   declarations: [
@@ -20,7 +19,10 @@ const routes: Routes = [
   ],
   imports: [
     BrowserModule,
-    RouterModule.forRoot(routes),
+    ReactiveFormsModule,
+    HttpClientModule,
+    SearchMoviesModule,
+    RouterModule.forRoot(APP_ROUTES),
     SharedModule,
     CoreModule
   ],

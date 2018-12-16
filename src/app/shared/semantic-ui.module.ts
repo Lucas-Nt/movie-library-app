@@ -1,9 +1,22 @@
 import { NgModule } from '@angular/core';
-import { SuiSidebarModule } from 'ng2-semantic-ui';
+
+import {
+  SuiSidebarModule,
+  SuiSearchModule,
+  SuiRatingModule
+} from 'ng2-semantic-ui';
 
 @NgModule({
-  imports: [ SuiSidebarModule ],
-  exports: [ SuiSidebarModule ]
+  imports: [
+    SuiSidebarModule,
+    SuiSearchModule,
+    SuiRatingModule
+  ],
+  exports: [
+    SuiSidebarModule,
+    SuiSearchModule,
+    SuiRatingModule
+  ]
 })
 
 export class SemanticUIModule {}

@@ -1,0 +1,13 @@
+<app-search-movies-filter (onSearchKeyUp)="executeSearch($event)">
+</app-search-movies-filter>
+
+<app-search-movies-results *ngIf="results?.length"
+                           [results]="this.results">
+</app-search-movies-results>
+
+
+
+
+
+
+

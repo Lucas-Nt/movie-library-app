@@ -1,3 +1,5 @@
+@import "./theme.scss";
+
 $max: 100;
 $offset: 5;
 $unit: 'px';
@@ -30,6 +32,10 @@ $unit: 'px';
 // Widths
 @include helper-class-generator('.w-', 'width');
 
+.w-100-pc {
+  width: 100%;
+}
+
 // Heights
 @include helper-class-generator('.h-', 'height');
 
@@ -51,10 +57,22 @@ $unit: 'px';
 // Flexbox Classes
 .flex {
   display: flex;
+}
 
-  &.align-items-center {
-    align-items: center;
-  }
+.align-items-center {
+  align-items: center;
+}
 
+.flex-grow-1 {
+  flex-grow: 1;
 }
 // End of Flexbox Classes
+
+// Input styles
+
+.dark-input {
+  background-color: lighten($background-color, 5) !important;
+  color: white !important;
+}
+
+// End of Input styles

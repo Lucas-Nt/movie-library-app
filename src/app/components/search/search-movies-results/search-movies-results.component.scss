@@ -1,0 +1,63 @@
+@import "../../../../assets/styles/theme.scss";
+
+.card {
+
+  &.dark-card {
+    background-color: $main-theme-color;
+    color: white;
+    box-shadow: 0 0 5px #424242;
+
+
+    .header {
+      color: white;
+    }
+
+    .meta {
+      color: #636363;
+    }
+
+    .description {
+      color: #969696;
+    }
+
+    .extra {
+      border-top: 1px solid #2b2b2b !important;
+      color: white;
+    }
+
+    &:hover {
+      background-color: lighten($main-theme-color, 5) !important;
+      box-shadow: 0 0 2px lighten($main-theme-color, 5) !important;
+
+      .header {
+        color: white !important;
+      }
+
+      .meta {
+        color: #636363 !important;
+      }
+
+      .description {
+        color: #969696 !important;
+      }
+
+      .extra {
+        border-top: 1px solid #2b2b2b !important;
+      }
+    }
+
+  }
+
+  .image {
+    background-position: top;
+    background-repeat: no-repeat;
+    background-size: contain;
+    height: 460px;
+  }
+
+  .description {
+    max-height: 60px;
+    overflow: hidden;
+  }
+}
+

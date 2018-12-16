@@ -4,6 +4,7 @@
 
   .vertical {
     box-shadow: 0 0 10px black;
+    background-color: $main-theme-color;
 
     .logo-wrapper {
       padding: 10px 12px 10px;
@@ -15,6 +16,15 @@
       }
     }
 
+    .item {
+      &.active {
+        background-color: $secondary-theme-color;
+        box-shadow: 0 0 1px $secondary-theme-color;
+        text-shadow: 0 0 1px;
+        transition: all .2s ease;
+      }
+    }
+
   }
 
   .custom-top-menu {
@@ -23,15 +33,7 @@
     width: calc(100% - 260px) !important;
   }
 
-  .menu-theme-color {
-    background-color: $light-black;
 
-    .item {
-      &:hover {
-        text-shadow: 0 0 1px;
-      }
-    }
-  }
 
 }
 

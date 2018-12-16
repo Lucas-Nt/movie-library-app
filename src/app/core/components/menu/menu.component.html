@@ -12,15 +12,35 @@
       <span class="text-normal">Library</span>
     </div>
 
-    <a class="item">Home</a>
-    <a class="item">Rated Movies</a>
-    <a class="item">Favourites</a>
+    <!-- Options -->
+    <a class="item"
+       routerLink="/">
+       Home
+    </a>
+
+    <a class="item"
+       routerLinkActive="active"
+       routerLink="/search">
+       Search Movies
+    </a>
+
+
+    <a class="item"
+       routerLink="/favourites"
+       routerLinkActive="active">
+      Favourites
+    </a>
+    <!-- /Options -->
 
   </div>
   <!-- /Sidebar -->
 
   <!-- Fixed Top Menu -->
   <div class="ui top inverted fixed menu custom-top-menu">
+
+    <div class="menu">
+    </div>
+
     <div class="right menu">
       <button class="ui purple button">Placeholder button</button>
     </div>
