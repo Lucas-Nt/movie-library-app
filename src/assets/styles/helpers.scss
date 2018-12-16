@@ -1,0 +1,60 @@
+$max: 100;
+$offset: 5;
+$unit: 'px';
+
+// Mixin for Helper Classes
+@mixin helper-class-generator($class-name, $style-name) {
+  $i: 0;
+  @while $i <= $max {
+    #{$class-name + $i} {
+      #{$style-name}: #{$i + $unit} !important;
+    }
+    $i: $i + $offset;
+  }
+}
+
+// Paddings
+@include helper-class-generator('.pt-', 'padding-top');
+@include helper-class-generator('.pr-', 'padding-right');
+@include helper-class-generator('.pb-', 'padding-bottom');
+@include helper-class-generator('.pl-', 'padding-left');
+@include helper-class-generator('.p-', 'padding');
+
+// Margins
+@include helper-class-generator('.mt-', 'margin-top');
+@include helper-class-generator('.mr-', 'margin-right');
+@include helper-class-generator('.mb-', 'margin-bottom');
+@include helper-class-generator('.ml-', 'margin-left');
+@include helper-class-generator('.m-', 'margin');
+
+// Widths
+@include helper-class-generator('.w-', 'width');
+
+// Heights
+@include helper-class-generator('.h-', 'height');
+
+
+// Text Classes
+.text-white {
+  color: white;
+}
+
+.text-bold {
+  font-weight: 800;
+}
+
+.text-normal {
+  font-weight: normal;
+}
+// End Text Classes
+
+// Flexbox Classes
+.flex {
+  display: flex;
+
+  &.align-items-center {
+    align-items: center;
+  }
+
+}
+// End of Flexbox Classes

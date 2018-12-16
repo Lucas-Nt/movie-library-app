@@ -1,0 +1,38 @@
+@import "../../../../assets/styles/theme.scss";
+
+.custom-menu-wrapper {
+
+  .vertical {
+    box-shadow: 0 0 10px black;
+
+    .logo-wrapper {
+      padding: 10px 12px 10px;
+      font-size: 20px;
+      margin-bottom: 15px;
+
+      .logo {
+        width: 35px;
+      }
+    }
+
+  }
+
+  .custom-top-menu {
+    padding: 10px;
+    box-shadow: 0 0 4px;
+    width: calc(100% - 260px) !important;
+  }
+
+  .menu-theme-color {
+    background-color: $light-black;
+
+    .item {
+      &:hover {
+        text-shadow: 0 0 1px;
+      }
+    }
+  }
+
+}
+
+
