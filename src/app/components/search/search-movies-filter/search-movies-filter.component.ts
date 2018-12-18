@@ -34,7 +34,7 @@ export class SearchMoviesFilterComponent implements OnInit, OnDestroy {
 
   private watchFormValueChanges(): void {
     this.searchFormSubscription = this.searchForm.valueChanges.pipe(
-      debounceTime(300),
+      debounceTime(500),
       distinctUntilChanged()
     ).subscribe(c => {
       this.onSearchKeyUp.emit(c.movieName);

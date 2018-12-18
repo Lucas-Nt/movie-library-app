@@ -1,5 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
 
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500,600&subset=latin-ext');
+@import "~@angular/material/prebuilt-themes/purple-green.css";
+
 @import "../src/assets/styles/helpers.scss";
 @import "../src/assets/styles/main.scss";
 @import "../src/assets/styles/theme.scss";

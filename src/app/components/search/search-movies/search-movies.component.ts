@@ -14,6 +14,12 @@ export class SearchMoviesComponent {
   results: any;
 
   executeSearch(param) {
+
+    if (!param) {
+      this.results = [];
+      return;
+    }
+
     this.movieResource.getMovies(param).subscribe((data: any) => {
       this.results = data.results;
     });

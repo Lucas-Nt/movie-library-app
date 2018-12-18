@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
-import { SemanticUIModule } from './semantic-ui.module';
+import { AngularMaterialModule } from './angular-material.module';
 
 
 @NgModule({
-  imports: [ SemanticUIModule ],
-  exports: [ SemanticUIModule ]
+  imports: [ AngularMaterialModule ],
+  exports: [ AngularMaterialModule ]
 })
 
 export class SharedModule {}

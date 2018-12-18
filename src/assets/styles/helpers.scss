@@ -39,6 +39,9 @@ $unit: 'px';
 // Heights
 @include helper-class-generator('.h-', 'height');
 
+.h-100-pc {
+  height: 100%;
+}
 
 // Text Classes
 .text-white {

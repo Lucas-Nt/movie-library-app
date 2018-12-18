@@ -1,17 +1,12 @@
-<div class="ui one column grid">
+<div [formGroup]="searchForm">
 
-  <div class="row">
-    <div class="column" [formGroup]="searchForm">
+  <mat-form-field class="w-100-pc" appearance="outline">
+    <mat-label>Movie Title</mat-label>
 
-      <div class="ui icon input w-100-pc">
-        <input class="dark-input"
-               type="text"
-               formControlName="movieName"
-               placeholder="Type a movie title...">
-        <i class="search icon"></i>
-      </div>
+    <input matInput formControlName="movieName">
 
-    </div>
-  </div>
+    <mat-icon matSuffix>search</mat-icon>
+  </mat-form-field>
 
 </div>
+

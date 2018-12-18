@@ -2,14 +2,22 @@ import { NgModule } from '@angular/core';
 import { MenuComponent } from './components/menu/menu.component';
 import { RouterModule } from '@angular/router';
 import { SharedModule } from '../shared/shared.module';
+import { SpinnerComponent } from './components/spinner/spinner.component';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
-  declarations: [ MenuComponent ],
+  declarations: [
+    MenuComponent,
+    SpinnerComponent
+  ],
   imports: [
     RouterModule,
-    SharedModule
+    SharedModule,
+    CommonModule
   ],
-  exports: [ MenuComponent ]
+  exports: [
+    MenuComponent,
+    SpinnerComponent ]
 })
 
 export class CoreModule {}

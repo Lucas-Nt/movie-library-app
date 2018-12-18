@@ -1,10 +1,66 @@
-<app-menu></app-menu>
+<mat-drawer-container class="h-100-pc" autosize>
 
-<!-- Main Content -->
-<div class="main-content">
-  <router-outlet></router-outlet>
-</div>
-<!-- /Main Content -->
+  <!-- Sidebar -->
+  <mat-drawer #sidebar
+              [opened]="true"
+              class="sidebar mat-elevation-z7"
+              mode="side">
+
+
+    <div class="logo-wrapper flex align-items-center text-white">
+      <img class="logo mr-10"
+            src="../assets/images/movie-slate.png"
+            alt="movie-slate-image">
+
+      <span class="text-bold">Movie</span>
+      <span class="text-normal">Library</span>
+    </div>
+
+    <mat-nav-list>
+      <a class="item"
+         mat-list-item
+         routerLink="/">
+        Home
+      </a>
+
+      <a class="item"
+         mat-list-item
+         routerLinkActive="active"
+         routerLink="/search">
+        Search Movies
+      </a>
+
+      <a class="item"
+         mat-list-item
+         routerLink="/favourites"
+         routerLinkActive="active">
+        Favourites
+      </a>
+    </mat-nav-list>
+
+  </mat-drawer>
+  <!-- /Sidebar -->
+
+  <!-- Top Menu -->
+  <mat-toolbar class="top-menu-fixed mat-elevation-z5">
+    <button mat-icon-button (click)="sidebar.toggle()">
+      <mat-icon>menu</mat-icon>
+    </button>
+  </mat-toolbar>
+  <!-- /Top Menu -->
+
+  <!-- Main Content -->
+  <div class="main-content">
+    <app-spinner></app-spinner>
+    <router-outlet></router-outlet>
+  </div>
+  <!-- /Main Content -->
+
+</mat-drawer-container>
+
+
+
+
 
 
 

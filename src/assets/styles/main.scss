@@ -1,5 +1,12 @@
 @import "./theme.scss";
 
+html {
+  height: 100%;
+}
+
 body {
-  background-color: $background-color !important;
+  height: 100%;
+  margin: 0;
+  background-color: $background-color;
+  font-family: "Roboto";
 }

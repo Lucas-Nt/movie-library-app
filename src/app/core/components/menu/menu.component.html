@@ -1,50 +1,49 @@
-<div class="custom-menu-wrapper">
+<mat-drawer-container class="h-100-pc" autosize>
+  <mat-drawer #sidebar
+              [opened]="true"
+              class="sidebar"
+              mode="side">
 
-  <!-- Sidebar -->
-  <div class="ui visible menu inverted left vertical sidebar">
 
     <div class="logo-wrapper flex align-items-center text-white">
       <img class="logo mr-10"
-           src="../assets/images/movie-slate.png"
-           alt="movie-slate-image">
+            src="../assets/images/movie-slate.png"
+            alt="movie-slate-image">
 
       <span class="text-bold">Movie</span>
       <span class="text-normal">Library</span>
     </div>
 
-    <!-- Options -->
-    <a class="item"
-       routerLink="/">
+    <mat-nav-list>
+      <a class="item"
+         mat-list-item
+         routerLink="/">
        Home
     </a>
 
-    <a class="item"
-       routerLinkActive="active"
-       routerLink="/search">
-       Search Movies
-    </a>
+      <a class="item"
+         mat-list-item
+         routerLinkActive="active"
+         routerLink="/search">
+        Search Movies
+      </a>
 
 
-    <a class="item"
-       routerLink="/favourites"
-       routerLinkActive="active">
-      Favourites
-    </a>
-    <!-- /Options -->
+      <a class="item"
+         mat-list-item
+         routerLink="/favourites"
+         routerLinkActive="active">
+        Favourites
+      </a>
+    </mat-nav-list>
 
-  </div>
-  <!-- /Sidebar -->
+  </mat-drawer>
 
-  <!-- Fixed Top Menu -->
-  <div class="ui top inverted fixed menu custom-top-menu">
+  <mat-toolbar>
+    <button mat-icon-button (click)="sidebar.toggle()">
+      <mat-icon>menu</mat-icon>
+    </button>
+  </mat-toolbar>
 
-    <div class="menu">
-    </div>
+</mat-drawer-container>
 
-    <div class="right menu">
-      <button class="ui purple button">Placeholder button</button>
-    </div>
-  </div>
-  <!-- Fixed Top Menu -->
-
-</div>
