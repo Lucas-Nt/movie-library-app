@@ -55,6 +55,10 @@ $unit: 'px';
 .text-normal {
   font-weight: normal;
 }
+
+.text-size-18 {
+  font-size: 18px;
+}
 // End Text Classes
 
 // Flexbox Classes
@@ -63,11 +67,23 @@ $unit: 'px';
 }
 
 .align-items-center {
-  align-items: center;
+  align-items: center !important;
+}
+
+.justify-content-around {
+  justify-content: space-around !important;
+}
+
+.justify-content-between {
+  justify-content: space-between !important;
 }
 
 .flex-grow-1 {
-  flex-grow: 1;
+  flex-grow: 1 !important;
+}
+
+.flex-row-reverse {
+  flex-direction: row-reverse !important;
 }
 // End of Flexbox Classes
 
@@ -79,3 +95,9 @@ $unit: 'px';
 }
 
 // End of Input styles
+
+// Cursors
+.cursor-pointer {
+  cursor: pointer;
+}
+// End of Cursors

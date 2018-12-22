@@ -14,6 +14,7 @@ export class SearchMoviesFilterComponent implements OnInit, OnDestroy {
 
   searchFormSubscription: Subscription;
   searchForm: FormGroup;
+  inputHasValue: boolean;
 
   constructor(private fb: FormBuilder) { }
 
@@ -24,6 +25,10 @@ export class SearchMoviesFilterComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.searchFormSubscription.unsubscribe();
+  }
+
+  resetForm(): void {
+    this.searchForm.reset();
   }
 
   private buildSearchForm(): void {
@@ -37,6 +42,7 @@ export class SearchMoviesFilterComponent implements OnInit, OnDestroy {
       debounceTime(500),
       distinctUntilChanged()
     ).subscribe(c => {
+      this.inputHasValue = c.movieName;
       this.onSearchKeyUp.emit(c.movieName);
     });
   }

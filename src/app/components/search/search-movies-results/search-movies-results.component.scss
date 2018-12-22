@@ -1,15 +1,21 @@
 @import "../../../../assets/styles/theme.scss";
 
 .movie-cards-wrapper {
-  display: flex;
-  flex: 1;
-  flex-wrap: wrap;
-  justify-content: space-around;
 
+  .movie-header {
+    min-height: 70px;
+  }
 
   .movie-card {
-    width: 250px;
-    float: left;
+    .movie-picture {
+      min-height: 500px;
+    }
+
+    .movie-description {
+      height: 85px;
+      max-height: 85px;
+      overflow: hidden;
+    }
   }
 
 }

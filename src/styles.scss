@@ -1,8 +1,20 @@
 /* You can add global styles to this file, and also import other style files */
 
+// Typography
 @import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500,600&subset=latin-ext');
+
+// Angular Material Theme
 @import "~@angular/material/prebuilt-themes/purple-green.css";
 
+// Bootstrap
+@import "../node_modules/bootstrap/scss/functions";
+@import "../node_modules/bootstrap/scss/variables";
+@import "../node_modules/bootstrap/scss/mixins";
+@import "../node_modules/bootstrap/scss/reboot";
+@import "../node_modules/bootstrap/scss/grid";
+
+// Custom CSS
+@import "../src/assets/styles/bs-overrides.scss";
 @import "../src/assets/styles/helpers.scss";
 @import "../src/assets/styles/main.scss";
 @import "../src/assets/styles/theme.scss";
