@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 import * as search from './index';
-import { AngularMaterialModule } from 'src/app/shared/angular-material.module';
 
 @NgModule({
   declarations: [
@@ -12,7 +12,7 @@ import { AngularMaterialModule } from 'src/app/shared/angular-material.module';
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    AngularMaterialModule
+    SharedModule
   ],
   providers: [
     ...search.RESOURCES

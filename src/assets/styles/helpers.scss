@@ -70,11 +70,11 @@ $unit: 'px';
   align-items: center !important;
 }
 
-.justify-content-around {
+.justify-space-around {
   justify-content: space-around !important;
 }
 
-.justify-content-between {
+.justify-space-between {
   justify-content: space-between !important;
 }
 
@@ -101,3 +101,9 @@ $unit: 'px';
   cursor: pointer;
 }
 // End of Cursors
+
+// Background Colors
+.transparent-background {
+ background: transparent;
+}
+// End of Background Colors

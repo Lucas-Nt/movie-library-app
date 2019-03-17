@@ -42,7 +42,7 @@ export class SearchMoviesFilterComponent implements OnInit, OnDestroy {
       debounceTime(500),
       distinctUntilChanged()
     ).subscribe(c => {
-      this.inputHasValue = c.movieName;
+      this.inputHasValue = Boolean(c.movieName);
       this.onSearchKeyUp.emit(c.movieName);
     });
   }

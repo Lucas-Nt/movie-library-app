@@ -1,27 +1,23 @@
 <div [formGroup]="searchForm">
 
-  <div class="row">
-    <div class="col-sm-12 col-md-4">
-      <mat-form-field class="w-100-pc" appearance="outline">
-        <mat-label class="text-white">Movie Title</mat-label>
+  <mat-form-field class="w-100-pc" appearance="outline">
+    <mat-label class="text-white">Movie Title</mat-label>
 
-        <input matInput formControlName="movieName" autocomplete="off">
+    <input matInput formControlName="movieName" autocomplete="off">
 
-        <mat-icon *ngIf="inputHasValue; else showSearchIcon"
-                  (click)="resetForm()"
-                  class="cursor-pointer"
-                  matSuffix>
-          clear
-        </mat-icon>
+    <mat-icon *ngIf="inputHasValue; else showSearchIcon"
+              (click)="resetForm()"
+              class="cursor-pointer"
+              matSuffix>
+      clear
+    </mat-icon>
 
-        <ng-template #showSearchIcon>
-          <mat-icon matSuffix>search</mat-icon>
-        </ng-template>
+    <ng-template #showSearchIcon>
+      <mat-icon matSuffix>search</mat-icon>
+    </ng-template>
 
 
-      </mat-form-field>
-    </div>
-  </div>
+  </mat-form-field>
 
 </div>
 

@@ -8,7 +8,8 @@ import {
   MatListModule,
   MatButtonModule,
   MatProgressSpinnerModule,
-  MatCardModule
+  MatCardModule,
+  MatPaginatorModule
 } from '@angular/material';
 
 import { MatIconModule } from '@angular/material/icon';
@@ -23,7 +24,8 @@ import { MatIconModule } from '@angular/material/icon';
     MatListModule,
     MatButtonModule,
     MatProgressSpinnerModule,
-    MatCardModule
+    MatCardModule,
+    MatPaginatorModule
   ],
   exports: [
     MatInputModule,
@@ -34,7 +36,8 @@ import { MatIconModule } from '@angular/material/icon';
     MatListModule,
     MatButtonModule,
     MatProgressSpinnerModule,
-    MatCardModule
+    MatCardModule,
+    MatPaginatorModule
   ]
 })
 

@@ -1,9 +1,44 @@
-<app-search-movies-filter (onSearchKeyUp)="executeSearch($event)">
-</app-search-movies-filter>
+<!-- Search Input And Pager -->
+<div class="flex justify-space-between">
 
-<app-search-movies-results *ngIf="results?.length"
+  <!-- Search Input -->
+  <div class="col-sm-5 pl-0">
+    <app-search-movies-filter (onSearchKeyUp)="executeSearch($event)">
+    </app-search-movies-filter>
+  </div>
+  <!-- /Search Input -->
+
+  <!-- Pager -->
+  <div class="col-sm-7 pr-0">
+    <mat-paginator *ngIf="hasResults"
+                   class="transparent-background"
+                   [length]="totalResults"
+                   [pageIndex]="currentIndex"
+                   [pageSize]="pageLength"
+                   [hidePageSize]="true"
+                   [showFirstLastButtons]="true"
+                   (page)="executeSearch(storedParameter, $event)">
+    </mat-paginator>
+  </div>
+  <!-- /Pager -->
+
+</div>
+<!-- /Search Input And Pager -->
+
+<!-- Results -->
+<app-search-movies-results *ngIf="hasResults; else noResults"
                            [results]="this.results">
 </app-search-movies-results>
+<!-- /Results -->
+
+<!-- No Results -->
+<ng-template #noResults>
+  <div class="no-results">
+    <span>No results available</span>
+  </div>
+</ng-template>
+<!-- /No Results -->
+
 
 
 
