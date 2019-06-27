@@ -1,11 +1,10 @@
 @import "./theme.scss";
 
-$max: 100;
-$offset: 5;
+$offset: 1;
 $unit: 'px';
 
 // Mixin for Helper Classes
-@mixin helper-class-generator($class-name, $style-name) {
+@mixin helper-class-generator($class-name, $style-name, $max: 100) {
   $i: 0;
   @while $i <= $max {
     #{$class-name + $i} {
@@ -31,6 +30,9 @@ $unit: 'px';
 
 // Widths
 @include helper-class-generator('.w-', 'width');
+
+// Font Sizes
+@include helper-class-generator('.fs-', 'font-size', 50);
 
 .w-100-pc {
   width: 100%;
@@ -68,6 +70,10 @@ $unit: 'px';
 
 .align-items-center {
   align-items: center !important;
+}
+
+.justify-flex-end {
+  justify-content: flex-end;
 }
 
 .justify-space-around {

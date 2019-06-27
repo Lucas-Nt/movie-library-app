@@ -1,4 +1,6 @@
-<mat-drawer-container class="h-100-pc" autosize>
+<mat-drawer-container class="h-100-pc"
+                      [class.sidebar-is-open]="sidebar.opened"
+                      autosize>
 
   <!-- Sidebar -->
   <mat-drawer #sidebar
@@ -9,8 +11,8 @@
 
     <div class="logo-wrapper flex align-items-center text-white">
       <img class="logo mr-10"
-            src="../assets/images/movie-slate.png"
-            alt="movie-slate-image">
+           src="../assets/images/movie-slate.png"
+           alt="movie-slate-image">
 
       <span class="text-bold">Movie</span>
       <span class="text-normal">Library</span>
@@ -23,19 +25,35 @@
         Home
       </a>
 
-      <a class="item"
-         mat-list-item
-         routerLinkActive="active"
-         routerLink="/search">
-        Search Movies
+      <a class="item item-with-icon"
+         (click)="toggleSearchMenuOptions()"
+         mat-list-item>
+        Search
+
+        <mat-icon *ngIf="areSearchOptionsVisible; else upArrow">
+          keyboard_arrow_up
+        </mat-icon>
+
+        <ng-template #upArrow>
+          <mat-icon>
+            keyboard_arrow_down
+          </mat-icon>
+        </ng-template>
+
       </a>
 
-      <!-- <a class="item"
-         mat-list-item
-         routerLink="/favourites"
-         routerLinkActive="active">
-        Favourites
-      </a> -->
+      <div *ngIf="areSearchOptionsVisible">
+        <a class="item"
+           mat-list-item
+           routerLinkActive="active"
+           routerLink="/search">
+          Movies
+        </a>
+        <a class="item"
+           mat-list-item>
+          Series
+        </a>
+      </div>
     </mat-nav-list>
 
   </mat-drawer>
@@ -43,24 +61,19 @@
 
   <!-- Top Menu -->
   <mat-toolbar class="top-menu-fixed mat-elevation-z5">
-    <button mat-icon-button (click)="sidebar.toggle()">
+    <button mat-icon-button
+            (click)="sidebar.toggle()">
       <mat-icon>menu</mat-icon>
     </button>
   </mat-toolbar>
   <!-- /Top Menu -->
 
   <!-- Main Content -->
-  <div class="main-content">
+  <div class="main-content"
+       [ngClass]="{ 'search-is-sticky': isSearchSticky }">
     <app-spinner></app-spinner>
     <router-outlet></router-outlet>
   </div>
   <!-- /Main Content -->
 
 </mat-drawer-container>
-
-
-
-
-
-
-

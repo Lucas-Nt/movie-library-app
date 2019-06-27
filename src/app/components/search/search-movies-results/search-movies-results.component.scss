@@ -1,14 +1,44 @@
 @import "../../../../assets/styles/theme.scss";
 
 .movie-cards-wrapper {
+  display: flex;
+  flex-wrap: wrap;
 
   .movie-header {
     min-height: 70px;
   }
 
   .movie-card {
+    background: #191919;
+    box-shadow: 0 0 2px black;
+
+    &:hover {
+      box-shadow: 0 0 14px black;
+      background: lighten(#191919, 5);
+      cursor: pointer;
+      transition: all .2s ease;
+
+      .movie-picture {
+        opacity: 1;
+        transition: all .2s ease;
+      }
+    }
+
+    .movie-rating {
+      font-size: 18px;
+      width: 50px;
+      height: 50px;
+      border: 5px solid darken($secondary-theme-color, 5);
+      text-align: center;
+      padding: 8px 0;
+      font-weight: bold;
+      color: #cbcbcb;
+      box-shadow: 0 0 3px $secondary-theme-color;
+    }
+
     .movie-picture {
       min-height: 500px;
+      opacity: 0.7;
     }
 
     .movie-description {

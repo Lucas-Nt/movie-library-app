@@ -15,7 +15,8 @@ import * as search from './index';
     SharedModule
   ],
   providers: [
-    ...search.RESOURCES
+    ...search.RESOURCES,
+    ...search.SERVICES
   ]
 })
 

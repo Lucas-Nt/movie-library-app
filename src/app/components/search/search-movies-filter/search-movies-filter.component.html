@@ -1,9 +1,12 @@
 <div [formGroup]="searchForm">
 
-  <mat-form-field class="w-100-pc" appearance="outline">
+  <mat-form-field class="search-input"
+                  appearance="outline">
     <mat-label class="text-white">Movie Title</mat-label>
 
-    <input matInput formControlName="movieName" autocomplete="off">
+    <input matInput
+           formControlName="movieName"
+           autocomplete="off">
 
     <mat-icon *ngIf="inputHasValue; else showSearchIcon"
               (click)="resetForm()"
@@ -16,8 +19,6 @@
       <mat-icon matSuffix>search</mat-icon>
     </ng-template>
 
-
   </mat-form-field>
 
 </div>
-

@@ -1,15 +1,15 @@
 <!-- Search Input And Pager -->
-<div class="flex justify-space-between">
+<div class="flex justify-space-between search-pager-wrapper mt-20">
 
   <!-- Search Input -->
-  <div class="col-sm-5 pl-0">
+  <div class="col-sm-5">
     <app-search-movies-filter (onSearchKeyUp)="executeSearch($event)">
     </app-search-movies-filter>
   </div>
   <!-- /Search Input -->
 
   <!-- Pager -->
-  <div class="col-sm-7 pr-0">
+  <div class="col-sm-7 flex align-items-center justify-flex-end">
     <mat-paginator *ngIf="hasResults"
                    class="transparent-background"
                    [length]="totalResults"
