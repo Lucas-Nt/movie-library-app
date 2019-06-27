@@ -1,9 +1,18 @@
 import { Routes } from '@angular/router';
 import { SearchMoviesComponent } from './components/search/search-movies/search-movies.component';
 import { MovieDetailsComponent } from './components/movie-details/movie-details.component';
+import { MovieDetailsResolver } from './components/movie-details/movie-details.resolver';
 
 export const APP_ROUTES: Routes = [
-  // { path: 'search', loadChildren: './components/search/search-movies.module#SearchMoviesModule' },
-  { path: 'search', component: SearchMoviesComponent },
-  { path: 'movie-details/:id', component: MovieDetailsComponent }
+  {
+    path: 'search',
+    component: SearchMoviesComponent
+  },
+  {
+    path: 'movie-details/:id',
+    component: MovieDetailsComponent,
+    resolve: {
+      movieDetails: MovieDetailsResolver
+    }
+  }
 ];

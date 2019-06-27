@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { MovieResource } from '../search/search-movies.resource';
+import { first } from 'rxjs/operators';
 
 @Component({
   selector: 'app-movie-details',
@@ -12,13 +13,11 @@ export class MovieDetailsComponent implements OnInit {
   movie: any;
   bgEndpoint = 'https://image.tmdb.org/t/p/w1280/';
 
-  constructor(private route: ActivatedRoute,
-              private movieResource: MovieResource) { }
+  constructor(private route: ActivatedRoute) { }
 
   ngOnInit() {
-    const movieID = this.route.snapshot.params['id'];
-    this.movieResource.getMovieDetails(movieID).subscribe(response => {
-      this.movie = response;
+    this.route.data.pipe(first()).subscribe(data => {
+      this.movie = data.movieDetails;
     });
   }
 
