@@ -1,7 +1,8 @@
-import { Component, OnInit, EventEmitter, Output, OnDestroy } from '@angular/core';
-import { FormGroup, FormBuilder } from '@angular/forms';
-import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
+import { Component, OnInit, EventEmitter, Output, OnDestroy, Input } from '@angular/core';
+import { FormGroup } from '@angular/forms';
+import { debounceTime } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
+import { SearchService } from '../search.service';
 
 @Component({
   selector: 'app-search-movies-filter',
@@ -10,40 +11,41 @@ import { Subscription } from 'rxjs';
 })
 export class SearchMoviesFilterComponent implements OnInit, OnDestroy {
 
+  @Input() form: FormGroup;
   @Output() onSearchKeyUp = new EventEmitter();
+  @Output() onClearInput = new EventEmitter();
 
-  searchFormSubscription: Subscription;
-  searchForm: FormGroup;
-  inputHasValue: boolean;
+  public searchFormSubscription: Subscription;
+  public inputHasValue: boolean;
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private searchService: SearchService) { }
 
   ngOnInit(): void {
-    this.buildSearchForm();
     this.watchFormValueChanges();
+
+    if (this.searchService.lastMovieSearchParam) {
+      this.form.patchValue(
+        { movieName: this.searchService.lastMovieSearchParam },
+        { emitEvent: false }
+      );
+      this.inputHasValue = true;
+    }
   }
 
   ngOnDestroy(): void {
     this.searchFormSubscription.unsubscribe();
   }
 
-  resetForm(): void {
-    this.searchForm.reset();
-  }
-
-  private buildSearchForm(): void {
-    this.searchForm = this.fb.group({
-      movieName: ['']
-    });
+  public clearInput(): void {
+    this.onClearInput.emit();
   }
 
   private watchFormValueChanges(): void {
-    this.searchFormSubscription = this.searchForm.valueChanges.pipe(
-      debounceTime(500),
-      distinctUntilChanged()
-    ).subscribe(c => {
-      this.inputHasValue = Boolean(c.movieName);
-      this.onSearchKeyUp.emit(c.movieName);
+    this.searchFormSubscription = this.form.valueChanges.pipe(
+      debounceTime(600)
+    ).subscribe(value => {
+      this.inputHasValue = Boolean(value.movieName);
+      this.onSearchKeyUp.emit(value.movieName);
     });
   }
 

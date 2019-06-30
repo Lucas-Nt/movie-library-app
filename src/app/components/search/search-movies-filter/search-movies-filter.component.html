@@ -1,4 +1,4 @@
-<div [formGroup]="searchForm">
+<div [formGroup]="form">
 
   <mat-form-field class="search-input"
                   appearance="outline">
@@ -9,7 +9,7 @@
            autocomplete="off">
 
     <mat-icon *ngIf="inputHasValue; else showSearchIcon"
-              (click)="resetForm()"
+              (click)="clearInput()"
               class="cursor-pointer"
               matSuffix>
       clear

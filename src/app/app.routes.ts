@@ -5,7 +5,7 @@ import { MovieDetailsResolver } from './components/movie-details/movie-details.r
 
 export const APP_ROUTES: Routes = [
   {
-    path: 'search',
+    path: 'search-movies',
     component: SearchMoviesComponent
   },
   {

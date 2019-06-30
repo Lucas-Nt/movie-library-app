@@ -3,7 +3,7 @@ import { SearchMoviesFilterComponent } from './search-movies-filter/search-movie
 import { SearchMoviesResultsComponent } from './search-movies-results/search-movies-results.component';
 
 import { MovieResource } from './search-movies.resource';
-import { SearchMoviesService } from './search-movies.service';
+import { SearchService } from './search.service';
 
 export const COMPONENTS = [
   SearchMoviesComponent,
@@ -16,6 +16,6 @@ export const RESOURCES = [
 ];
 
 export const SERVICES = [
-  SearchMoviesService
+  SearchService
 ];
 

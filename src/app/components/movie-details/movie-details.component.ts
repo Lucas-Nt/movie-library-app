@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { MovieResource } from '../search/search-movies.resource';
 import { first } from 'rxjs/operators';
 
 @Component({
@@ -10,8 +9,8 @@ import { first } from 'rxjs/operators';
 })
 export class MovieDetailsComponent implements OnInit {
 
-  movie: any;
-  bgEndpoint = 'https://image.tmdb.org/t/p/w1280/';
+  public movie: any;
+  public bgEndpoint = 'https://image.tmdb.org/t/p/w1280/';
 
   constructor(private route: ActivatedRoute) { }
 
@@ -21,7 +20,7 @@ export class MovieDetailsComponent implements OnInit {
     });
   }
 
-  createBackgroundUrl(backgroundImage: string) {
+  public createBackgroundUrl(backgroundImage: string) {
     return `url(${this.bgEndpoint}${backgroundImage})`;
   }
 

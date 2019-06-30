@@ -4,7 +4,10 @@ import { MovieResource } from '../search-movies.resource';
 import { Subscription } from 'rxjs';
 import { MovieMapper } from 'src/app/shared/mappers/movie.mapper';
 import { MovieViewModel } from 'src/app/shared/models/movie.model';
-import { SearchMoviesService } from '../search-movies.service';
+import { FormGroup, FormBuilder } from '@angular/forms';
+import { SearchService } from '../search.service';
+import { distinctUntilChanged } from 'rxjs/operators';
+
 
 @Component({
   selector: 'app-search-movies',
@@ -14,17 +17,20 @@ import { SearchMoviesService } from '../search-movies.service';
 export class SearchMoviesComponent implements OnInit, OnDestroy {
 
   constructor(private movieResource: MovieResource,
-              private movieMapper: MovieMapper,
-              private searchMoviesService: SearchMoviesService) {}
+              private fb: FormBuilder,
+              private searchService: SearchService,
+              private movieMapper: MovieMapper) {}
 
-  storedParameter: string;
-  currentIndex: number;
-  pageLength: number;
-  totalResults: number;
-  isSearchSticky: boolean;
-  results: MovieViewModel[];
+  public storedParameter: string;
+  public currentIndex: number;
+  public pageLength: number;
+  public totalResults: number;
+  public isSearchSticky: boolean;
+  public results$ = this.searchService.movieResults;
+  public results: MovieViewModel[];
+  public searchInputForm: FormGroup;
 
-  private _movieSearchSubscription = new Subscription();
+  private _subscriptions = new Subscription();
 
   get hasResults() {
     return this.results &&
@@ -32,38 +38,37 @@ export class SearchMoviesComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    // TODO: unsubscribe
-    this.searchMoviesService.isSearchFilterSticky.subscribe(isSticky => {
-      this.isSearchSticky = isSticky;
-    });
+    this.buildSearchForm();
+    this.watchResultChanges();
   }
 
   ngOnDestroy(): void {
-    this._movieSearchSubscription.unsubscribe();
+    this._subscriptions.unsubscribe();
   }
 
-  executeSearch(param: string, pageEventObject?: PageEvent): void {
-    this.storedParameter = param;
+  public executeSearch(param: string, pageEventObject?: PageEvent): void {
+    this.storedParameter = this.searchService.lastMovieSearchParam = param;
     const pageToRequest = this.pageToRequest(pageEventObject);
 
     if (!param) {
-      this.results = [];
+      this.results$.next(null);
       return;
     }
 
-    this._movieSearchSubscription = this.movieResource.getMovies(param, pageToRequest).subscribe(
-      (data: any) => {
-        const currentPage = data.page;
-        const totalPages = data.total_pages;
-
-        this.currentIndex = currentPage - 1;
-        this.results = data.results.map(item => this.movieMapper.toViewModel(item));
-        this.totalResults = data.total_results;
-
-        if (currentPage !== totalPages) {
-          this.pageLength = this.results && this.results.length;
-        }
+    const movieSearchSubscription = this.movieResource.getMovies(param, pageToRequest)
+    .subscribe((data: any) => {
+      this.searchService.movieResults.next(data);
     });
+
+    this._subscriptions.add(movieSearchSubscription);
+  }
+
+  public resetForm(): void {
+    this.searchInputForm.reset();
+  }
+
+  public changePage(event: PageEvent): void {
+    this.executeSearch(this.searchService.lastMovieSearchParam, event);
   }
 
   private pageToRequest(pageEventObject: PageEvent): number {
@@ -71,6 +76,38 @@ export class SearchMoviesComponent implements OnInit, OnDestroy {
     const hasNoCurrentIndex = !currentIndex || currentIndex === 0;
 
     return hasNoCurrentIndex ? 1 : currentIndex + 1;
+  }
+
+  private buildSearchForm(): void {
+    this.searchInputForm = this.fb.group({
+      movieName: ['']
+    });
+  }
+
+  private watchResultChanges(): void {
+
+    const resultsSubscription = this.results$.pipe(
+      distinctUntilChanged()
+    ).subscribe((data: any) => {
+
+      if (!data) {
+        this.results = [];
+        return;
+      }
+
+      const currentPage = data.page;
+      const totalPages = data.total_pages;
+
+      this.currentIndex = currentPage - 1;
+      this.results = data.results.map(item => this.movieMapper.toViewModel(item));
+      this.totalResults = data.total_results;
+
+      if (currentPage !== totalPages) {
+        this.pageLength = this.results && this.results.length;
+      }
+    });
+
+    this._subscriptions.add(resultsSubscription);
   }
 
 }

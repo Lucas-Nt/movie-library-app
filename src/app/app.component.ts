@@ -2,8 +2,8 @@ import { CdkScrollable, ScrollDispatcher } from '@angular/cdk/overlay';
 import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
-import { SearchMoviesService } from './components/search/search-movies.service';
 import { NavigationEnd, Router } from '@angular/router';
+import { SearchService } from './components/search/search.service';
 
 @Component({
   selector: 'app-root',
@@ -20,6 +20,7 @@ export class AppComponent implements OnInit, OnDestroy{
 
   constructor(private scrollDispatcher: ScrollDispatcher,
               private router: Router,
+              private searchService: SearchService,
               private cdr: ChangeDetectorRef) {}
 
   ngOnInit(): void {
@@ -27,9 +28,11 @@ export class AppComponent implements OnInit, OnDestroy{
     this.router.events.subscribe(event => {
       // Scroll to top if accessing a page, not via browser history stack
       if (event instanceof NavigationEnd) {
-          const contentContainer = document.querySelector('.mat-drawer-content') || window;
-          contentContainer.scrollTo(0, 0);
+        const contentContainer = document.querySelector('.mat-drawer-content') || window;
+        contentContainer.scrollTo(0, 0);
+        this.searchService.evaluateDataClearing(event.url);
       }
+
     });
 
     this._scrollingSubscription = this.scrollDispatcher.scrolled()

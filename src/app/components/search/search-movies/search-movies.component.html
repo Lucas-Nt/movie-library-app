@@ -3,7 +3,9 @@
 
   <!-- Search Input -->
   <div class="col-sm-5">
-    <app-search-movies-filter (onSearchKeyUp)="executeSearch($event)">
+    <app-search-movies-filter [form]="searchInputForm"
+                              (onSearchKeyUp)="executeSearch($event)"
+                              (onClearInput)="resetForm()">
     </app-search-movies-filter>
   </div>
   <!-- /Search Input -->
@@ -17,7 +19,7 @@
                    [pageSize]="pageLength"
                    [hidePageSize]="true"
                    [showFirstLastButtons]="true"
-                   (page)="executeSearch(storedParameter, $event)">
+                   (page)="changePage($event)">
     </mat-paginator>
   </div>
   <!-- /Pager -->
@@ -27,7 +29,7 @@
 
 <!-- Results -->
 <app-search-movies-results *ngIf="hasResults; else noResults"
-                           [results]="this.results">
+                           [results]="results">
 </app-search-movies-results>
 <!-- /Results -->
 

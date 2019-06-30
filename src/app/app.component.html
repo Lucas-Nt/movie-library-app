@@ -46,7 +46,7 @@
         <a class="item"
            mat-list-item
            routerLinkActive="active"
-           routerLink="/search">
+           routerLink="/search-movies">
           Movies
         </a>
         <a class="item"
@@ -70,7 +70,7 @@
 
   <!-- Main Content -->
   <div class="main-content"
-       [ngClass]="{ 'search-is-sticky': isSearchSticky }">
+       [class.search-is-sticky]="isSearchSticky">
     <app-spinner></app-spinner>
     <router-outlet></router-outlet>
   </div>
