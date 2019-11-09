@@ -17,7 +17,8 @@ import { CommonModule } from '@angular/common';
   ],
   exports: [
     MenuComponent,
-    SpinnerComponent ]
+    SpinnerComponent
+  ]
 })
 
 export class CoreModule {}

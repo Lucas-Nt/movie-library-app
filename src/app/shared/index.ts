@@ -1,5 +1,5 @@
-import { MovieMapper } from "./mappers/movie.mapper";
-import { YearOnlyPipe } from "./pipes/year-only.pipe";
+import { MovieMapper } from './mappers/movie.mapper';
+import { YearOnlyPipe } from './pipes/year-only.pipe';
 
 export const PIPES = [
   YearOnlyPipe

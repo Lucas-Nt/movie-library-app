@@ -8,9 +8,9 @@
 
     <mat-card class="movie-card mat-elevation-z10 mb-20"
               (click)="goToDetails(movie.id)"
-              title="{{movie.title}}">
+              title="{{ movie.title }}">
       <mat-card-header class="movie-header flex flex-row-reverse justify-space-between">
-        <mat-card-title class="fs-17 mb-8">
+        <mat-card-title class="fs-17 mb-8 truncate-title">
           {{ movie.title }}
         </mat-card-title>
         <div class="movie-rating"

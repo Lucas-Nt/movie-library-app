@@ -6,6 +6,13 @@
 
   .movie-header {
     min-height: 70px;
+
+    .truncate-title {
+      width: 275px;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
+    }
   }
 
   .movie-card {

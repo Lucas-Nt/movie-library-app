@@ -1,13 +1,14 @@
-<div id="movie-details-top"
-     class="movie-detail-wrapper flex"
+<div class="movie-detail-wrapper flex"
      [ngStyle]="{'background-image': createBackgroundUrl(movie?.backdrop_path)}">
-  <div class="col-md-12">
+
+  <div class="movie-details-top col-md-12">
     <div class="movie-header">
       <h1 class="fs-45">
         {{ movie?.original_title }} {{ movie?.release_date | yearOnly }}
       </h1>
     </div>
   </div>
+
 </div>
 
 <pre>
