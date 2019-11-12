@@ -1,10 +1,10 @@
-<div class="col-sm-12 mt-20">
-  <h3 class="text-white">Results</h3>
+<div class="col-sm-12 mt-40 mb-30">
+  <h3 class="results-text">Results:</h3>
 </div>
 
 <div class="movie-cards-wrapper">
   <div *ngFor="let movie of results; trackBy: movieTrackBy"
-       class="col-xs-12 col-sm-6 col-md-3">
+       class="col-xs-12 col-sm-6 col-md-4 col-lg-3 min-width-350">
 
     <mat-card class="movie-card mat-elevation-z10 mb-20"
               (click)="goToDetails(movie.id)"
@@ -13,19 +13,32 @@
         <mat-card-title class="fs-17 mb-8 truncate-title">
           {{ movie.title }}
         </mat-card-title>
+        <mat-card-subtitle>
+          {{ movie.releaseDate | yearOnly }}
+        </mat-card-subtitle>
         <div class="movie-rating"
              mat-card-avatar>
           {{ movie.rating }}
         </div>
-        <mat-card-subtitle>
-          {{ movie.releaseDate | yearOnly }}
-        </mat-card-subtitle>
       </mat-card-header>
 
-      <img class="movie-picture"
+      <!-- Movie Poster -->
+      <img *ngIf="hasMovieImage(imgEndpoint+movie.poster); else noMovieImage"
+           class="movie-picture"
            mat-card-image
            [src]="imgEndpoint+movie.poster"
            alt="movie poster">
+      <!-- /Movie Poster -->
+
+      <!-- No Image Available -->
+      <ng-template #noMovieImage>
+        <img class="movie-picture"
+             mat-card-image
+             src="../../../../assets/images/no-image-available.png"
+             alt="movie poster">
+      </ng-template>
+      <!-- /No Image Available -->
+
 
       <mat-card-content class="movie-description">
         <p>{{ movie.description }}</p>

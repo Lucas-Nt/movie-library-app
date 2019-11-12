@@ -1,18 +1,26 @@
 @import "../../../../assets/styles/theme.scss";
 
+.results-text {
+  color: white;
+  border-bottom: 5px solid #2f0a29;
+  padding-bottom: 15px;
+  padding-left: 10px;
+}
+
 .movie-cards-wrapper {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
 
   .movie-header {
     min-height: 70px;
 
     .truncate-title {
-      width: 275px;
       text-overflow: ellipsis;
       white-space: nowrap;
       overflow: hidden;
     }
+
   }
 
   .movie-card {
@@ -35,17 +43,19 @@
       font-size: 18px;
       width: 50px;
       height: 50px;
-      border: 5px solid darken($secondary-theme-color, 5);
+      border: 5px solid darken($main-theme-color, 5);
       text-align: center;
       padding: 8px 0;
       font-weight: bold;
       color: #cbcbcb;
-      box-shadow: 0 0 3px $secondary-theme-color;
+      box-shadow: 0 0 3px $main-theme-color;
+      background: #101010;
     }
 
     .movie-picture {
-      min-height: 500px;
+      height: 500px;
       opacity: 0.7;
+      object-fit: cover;
     }
 
     .movie-description {

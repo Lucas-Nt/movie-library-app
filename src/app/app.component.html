@@ -76,15 +76,7 @@
   </div>
   <!-- /Main Content -->
 
-  <div class="scroll-up-button"
-       [class.scroll-up-visible]="isSearchSticky"
-       (click)="scrollToTop()">
-    <button mat-fab
-            color="primary">
-      <mat-icon>
-        keyboard_arrow_up
-      </mat-icon>
-    </button>
-  </div>
+  <app-scroll-up-button [isVisible]="isScrollUpButtonVisible">
+  </app-scroll-up-button>
 
 </mat-drawer-container>

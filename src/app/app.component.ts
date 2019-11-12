@@ -15,6 +15,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
   areSearchOptionsVisible: boolean;
   isSearchSticky: boolean;
+  isScrollUpButtonVisible: boolean;
 
   private _subscriptions = new Subscription();
 
@@ -37,7 +38,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
     const scrollingSubscription = this.scrollDispatcher.scrolled()
                                   .pipe(debounceTime(200))
-                                  .subscribe((data: CdkScrollable) => this.evaluateStickySearch(data));
+                                  .subscribe((data: CdkScrollable) => this.initiateScrollingActions(data));
 
     this._subscriptions.add(routingSubscription);
     this._subscriptions.add(scrollingSubscription);
@@ -51,12 +52,26 @@ export class AppComponent implements OnInit, OnDestroy {
     this.areSearchOptionsVisible = !this.areSearchOptionsVisible;
   }
 
-  scrollToTop() {
-    const element = document.getElementsByClassName('mat-drawer-content')[0];
-    element.scrollTo({ top: 0, behavior: 'smooth' });
+  private initiateScrollingActions(data: CdkScrollable): void {
+    const topOffset = data.getElementRef().nativeElement.scrollTop || 0;
+    const hasScrolledDown = topOffset > 100 ? true : false;
+
+    if (hasScrolledDown) {
+      this.showStickySearchBar(true);
+      this.showScrollUpButton(true);
+    } else {
+      this.showScrollUpButton(false);
+      this.showStickySearchBar(false);
+    }
+
   }
 
-  private evaluateStickySearch(data: CdkScrollable) {
+  private showScrollUpButton(status: boolean): void {
+    this.isScrollUpButtonVisible = status;
+    this.cdr.detectChanges();
+  }
+
+  private showStickySearchBar(status: boolean) {
     const isInSearchPage = window.location.href.includes('search');
 
     if (!isInSearchPage) {
@@ -65,8 +80,7 @@ export class AppComponent implements OnInit, OnDestroy {
       return;
     }
 
-    const topOffset = data.getElementRef().nativeElement.scrollTop || 0;
-    this.isSearchSticky = topOffset > 100 ? true : false;
+    this.isSearchSticky = status;
     this.cdr.detectChanges();
   }
 

@@ -1,6 +1,9 @@
+import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { first } from 'rxjs/operators';
+import { MatDialog } from '@angular/material';
+import { DialogBaseComponent } from 'src/app/shared/components/dialog-base/dialog-base.component';
 
 @Component({
   selector: 'app-movie-details',
@@ -10,9 +13,12 @@ import { first } from 'rxjs/operators';
 export class MovieDetailsComponent implements OnInit {
 
   public movie: any;
-  public bgEndpoint = 'https://image.tmdb.org/t/p/w1280/';
+  public backgroundEndpoint = 'https://image.tmdb.org/t/p/w1280/';
+  public posterEndpoint = 'https://image.tmdb.org/t/p/w300/';
 
-  constructor(private route: ActivatedRoute) { }
+  constructor(private route: ActivatedRoute,
+              private dialog: MatDialog,
+              private location: Location) { }
 
   ngOnInit() {
     this.route.data.pipe(first()).subscribe(data => {
@@ -21,7 +27,19 @@ export class MovieDetailsComponent implements OnInit {
   }
 
   public createBackgroundUrl(backgroundImage: string) {
-    return `url(${this.bgEndpoint}${backgroundImage})`;
+    return `url(${this.backgroundEndpoint}${backgroundImage})`;
+  }
+
+  public goToPreviousPage(): void {
+    this.location.back();
+  }
+
+  public openTrailerDialog(stringParam: string): void {
+    this.dialog.open(DialogBaseComponent, {
+      data: { youtubeKey: stringParam },
+      width: '60%',
+      height: '60%'
+    });
   }
 
 }

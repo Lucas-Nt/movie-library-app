@@ -38,6 +38,10 @@ $unit: 'px';
   width: 100%;
 }
 
+.min-width-350 {
+  min-width: 350px;
+}
+
 // Heights
 @include helper-class-generator('.h-', 'height');
 
@@ -46,8 +50,16 @@ $unit: 'px';
 }
 
 // Text Classes
+.text-primary {
+  color: $main-theme-color !important;
+}
+
 .text-white {
   color: white;
+}
+
+.text-light-white {
+  color: #adadad;
 }
 
 .text-bold {
@@ -90,6 +102,10 @@ $unit: 'px';
 
 .flex-row-reverse {
   flex-direction: row-reverse !important;
+}
+
+.flex-column {
+  flex-direction: column;
 }
 // End of Flexbox Classes
 

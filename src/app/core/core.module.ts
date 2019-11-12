@@ -4,11 +4,13 @@ import { RouterModule } from '@angular/router';
 import { SharedModule } from '../shared/shared.module';
 import { SpinnerComponent } from './components/spinner/spinner.component';
 import { CommonModule } from '@angular/common';
+import { ScrollUpButtonComponent } from './components/scroll-up-button/scroll-up-button.component';
 
 @NgModule({
   declarations: [
     MenuComponent,
-    SpinnerComponent
+    SpinnerComponent,
+    ScrollUpButtonComponent
   ],
   imports: [
     RouterModule,
@@ -17,7 +19,8 @@ import { CommonModule } from '@angular/common';
   ],
   exports: [
     MenuComponent,
-    SpinnerComponent
+    SpinnerComponent,
+    ScrollUpButtonComponent
   ]
 })
 

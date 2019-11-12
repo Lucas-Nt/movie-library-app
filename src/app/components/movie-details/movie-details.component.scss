@@ -1,24 +1,75 @@
+// TODO: check if needed?
+@import "../../../assets/styles/theme.scss";
+
+
 .movie-detail-wrapper {
-  height: 100vh;
   background-size: cover;
   background-attachment: fixed;
+  min-height: calc(100vh - 74px); //TODO: check firefox
 
   &:after {
     content: '';
-    position: absolute;
-    background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0) -100%, #24091f 100%);
-    width: 100%;
+    position: fixed;
+    background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0) -600%, #24091f 100%);
+    // width: 100%;
+    // height: 100vh;
+
     height: 100vh;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    // width: calc(100% - 18px);
   }
 
   .movie-details-top {
     z-index: 1;
 
     .movie-header {
-      padding: 25px 10px;
+      display: flex;
+      align-items: center;
+      padding: 40px 10px;
 
       h1 {
         text-shadow: 0 0 8px black;
+        margin-bottom: 0;
+
+        .arrow-back {
+          transform: scale(2.2);
+          position: relative;
+          right: 7px;
+          cursor: pointer;
+        }
+      }
+
+      .genre-tags {
+        display: flex;
+        padding-left: 30px;
+      }
+
+      // TODO: remove this and create a mixin maybe??
+      .movie-rating {
+        margin-left: auto;
+        margin-right: 25px;
+        font-size: 20px;
+        width: 60px;
+        height: 60px;
+        border: 5px solid darken($main-theme-color, 5);
+        text-align: center;
+        padding: 10px 0;
+        font-weight: bold;
+        color: #cbcbcb;
+        box-shadow: 0 0 3px $main-theme-color;
+        background: #101010;
+        border-radius: 50%;
+      }
+    }
+
+    .main-movie-info {
+      .description {
+        text-align: justify;
+        line-height: 2.5;
+        max-width: 70%;
+        color: #adadad; // TODO: replace with variable
       }
     }
   }

@@ -3,14 +3,101 @@
 
   <div class="movie-details-top col-md-12">
     <div class="movie-header">
-      <h1 class="fs-45">
+
+      <!-- Movie Title -->
+      <h1 class="inline-block fs-35">
+        <!-- /Movie Title -->
+
+        <!-- Go Back Icon -->
+        <mat-icon (click)="goToPreviousPage()"
+                  color="primary"
+                  class="arrow-back">
+          keyboard_arrow_left
+        </mat-icon>
+        <!-- /Go Back Icon -->
+
         {{ movie?.original_title }} {{ movie?.release_date | yearOnly }}
       </h1>
+
+      <!-- Genre Tags -->
+      <mat-chip-list class="genre-tags">
+        <mat-chip *ngFor="let genre of movie?.genres"
+                  color="primary"
+                  selected>
+          {{ genre.name }}
+        </mat-chip>
+      </mat-chip-list>
+      <!-- /Genre Tags -->
+
+      <!-- Movie Rating -->
+      <div class="movie-rating">
+        {{ movie?.vote_average }}
+      </div>
+      <!-- /Movie Rating -->
+
     </div>
+
+    <div class="main-movie-info flex pl-40 pr-40">
+
+      <!-- Movie Poster -->
+      <img class="mat-elevation-z11"
+           [src]="posterEndpoint+movie?.poster_path">
+      <!-- /Movie Poster -->
+
+      <!-- Other Movie Info -->
+      <div class="flex flex-column justify-space-between pl-25 fs-18">
+
+        <!-- Description -->
+        <p class="description text-light-white">{{ movie?.overview }}</p>
+        <!-- /Description -->
+
+        <div>
+
+          <button class="mb-15"
+                  mat-raised-button
+                  color="primary"
+                  [disabled]="!movie.videos.results.length"
+                  (click)="openTrailerDialog(movie.videos.results[0].key)">
+            <mat-icon>videocam</mat-icon>
+            See trailer
+          </button>
+
+          <!-- Runtime Info -->
+          <div class="pb-15">
+            <strong class="pr-10">Runtime:</strong>
+            <span class="text-light-white">{{movie?.runtime | runtime}}</span>
+          </div>
+          <!-- /Runtime Info -->
+
+          <!-- Movie Website -->
+          <div class="pb-15">
+            <strong class="pr-10">Movie website:</strong>
+
+            <a *ngIf="movie?.homepage; else empty"
+               class="text-primary"
+               [href]="movie?.homepage"
+               target="_blank">
+              {{ movie?.homepage }}
+            </a>
+
+            <ng-template #empty>
+              <span class="text-light-white">-</span>
+            </ng-template>
+          </div>
+          <!-- /Movie Website -->
+
+        </div>
+
+      </div>
+      <!-- /Other Movie Info -->
+
+    </div>
+
+
+    <!-- <pre>
+      {{movie | json}}
+    </pre> -->
+
   </div>
 
 </div>
-
-<pre>
-  {{movie | json}}
-</pre>

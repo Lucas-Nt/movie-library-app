@@ -22,7 +22,7 @@ export class MovieResource {
   getMovieDetails(movieID: number) {
     const url = 'https://api.themoviedb.org/3/movie';
 
-    return this.http.get(`${url}/${movieID}?api_key=${this.apiKey}`);
+    return this.http.get(`${url}/${movieID}?api_key=${this.apiKey}&append_to_response=videos`);
   }
 
 }

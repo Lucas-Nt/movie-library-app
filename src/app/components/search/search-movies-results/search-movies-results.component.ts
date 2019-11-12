@@ -18,6 +18,10 @@ export class SearchMoviesResultsComponent {
     return item.id || index;
   }
 
+  hasMovieImage(movieImageUrl: string): boolean {
+    return movieImageUrl.includes(null) ? false : true;
+  }
+
   goToDetails(id: number): void {
     this.router.navigate(['movie-details/' + id]);
   }

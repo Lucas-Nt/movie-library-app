@@ -9,7 +9,9 @@ import {
   MatButtonModule,
   MatProgressSpinnerModule,
   MatCardModule,
-  MatPaginatorModule
+  MatPaginatorModule,
+  MatChipsModule,
+  MatDialogModule
 } from '@angular/material';
 
 import { MatIconModule } from '@angular/material/icon';
@@ -25,7 +27,9 @@ import { MatIconModule } from '@angular/material/icon';
     MatButtonModule,
     MatProgressSpinnerModule,
     MatCardModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatChipsModule,
+    MatDialogModule
   ],
   exports: [
     MatInputModule,
@@ -37,7 +41,9 @@ import { MatIconModule } from '@angular/material/icon';
     MatButtonModule,
     MatProgressSpinnerModule,
     MatCardModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatChipsModule,
+    MatDialogModule
   ]
 })
 
