@@ -1,5 +1,5 @@
 <div class="movie-detail-wrapper flex"
-     [ngStyle]="{'background-image': createBackgroundUrl(movie?.backdrop_path)}">
+     [ngStyle]="{ 'background-image': createBackgroundImage(movie.backdrop_path) }">
 
   <div class="movie-details-top col-md-12">
     <div class="movie-header">
@@ -16,7 +16,7 @@
         </mat-icon>
         <!-- /Go Back Icon -->
 
-        {{ movie?.original_title }} {{ movie?.release_date | yearOnly }}
+        {{ movie.original_title }} {{ movie.release_date | yearOnly }}
       </h1>
 
       <!-- Genre Tags -->
@@ -31,7 +31,7 @@
 
       <!-- Movie Rating -->
       <div class="movie-rating">
-        {{ movie?.vote_average }}
+        {{ movie.vote_average }}
       </div>
       <!-- /Movie Rating -->
 
@@ -48,7 +48,7 @@
       <div class="flex flex-column justify-space-between pl-25 fs-18">
 
         <!-- Description -->
-        <p class="description text-light-white">{{ movie?.overview }}</p>
+        <p class="description text-light-white">{{ movie.overview | truncateText:295 }}</p>
         <!-- /Description -->
 
         <div>
@@ -59,13 +59,13 @@
                   [disabled]="!movie.videos.results.length"
                   (click)="openTrailerDialog(movie.videos.results[0].key)">
             <mat-icon>videocam</mat-icon>
-            See trailer
+            {{ movie.videos.results.length ? 'See trailer' : 'No Trailer Available' }}
           </button>
 
           <!-- Runtime Info -->
           <div class="pb-15">
             <strong class="pr-10">Runtime:</strong>
-            <span class="text-light-white">{{movie?.runtime | runtime}}</span>
+            <span class="text-light-white">{{movie.runtime | runtime}}</span>
           </div>
           <!-- /Runtime Info -->
 
@@ -77,7 +77,7 @@
                class="text-primary"
                [href]="movie?.homepage"
                target="_blank">
-              {{ movie?.homepage }}
+              {{ movie.homepage }}
             </a>
 
             <ng-template #empty>

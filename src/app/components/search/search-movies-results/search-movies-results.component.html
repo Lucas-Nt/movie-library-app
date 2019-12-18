@@ -40,8 +40,8 @@
       <!-- /No Image Available -->
 
 
-      <mat-card-content class="movie-description">
-        <p>{{ movie.description }}</p>
+      <mat-card-content class="movie-description text-light-white">
+        <p>{{ movie.description | truncateText:145 }}</p>
       </mat-card-content>
 
       <!-- <mat-card-actions>

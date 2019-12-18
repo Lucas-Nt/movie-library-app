@@ -25,7 +25,6 @@ export class SearchMoviesComponent implements OnInit, OnDestroy {
   public currentIndex: number;
   public pageLength: number;
   public totalResults: number;
-  public isSearchSticky: boolean;
   public results$ = this.searchService.movieResults;
   public results: MovieViewModel[];
   public searchInputForm: FormGroup;

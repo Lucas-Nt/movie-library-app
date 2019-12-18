@@ -26,8 +26,11 @@ export class MovieDetailsComponent implements OnInit {
     });
   }
 
-  public createBackgroundUrl(backgroundImage: string) {
-    return `url(${this.backgroundEndpoint}${backgroundImage})`;
+  public createBackgroundImage(backgroundImage: string): string {
+    const gradientStyle = 'linear-gradient(to bottom, rgba(255, 255, 255, 0) -600%, #24091f 100%)';
+
+    return backgroundImage === null ? `${gradientStyle}`
+                                    : `${gradientStyle}, url(${this.backgroundEndpoint}${backgroundImage})`;
   }
 
   public goToPreviousPage(): void {
@@ -36,7 +39,7 @@ export class MovieDetailsComponent implements OnInit {
 
   public openTrailerDialog(stringParam: string): void {
     this.dialog.open(DialogBaseComponent, {
-      data: { youtubeKey: stringParam },
+      data: { dialogType: 'video', youtubeKey: stringParam },
       width: '60%',
       height: '60%'
     });

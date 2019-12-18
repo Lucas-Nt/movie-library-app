@@ -2,7 +2,7 @@
 
 .main-content {
   min-height: 100%;
-  padding: 64px 0 10px;
+  padding-top: 64px;
   background: linear-gradient(to top right, rgba(0, 0, 0, 0.8), rgba(53, 0, 45, 0.8));
   background-attachment: fixed;
   background-position: center;
@@ -13,15 +13,6 @@
   width: 290px;
   min-width: 250px;
   background-color: $secondary-theme-color;
-
-  .logo-wrapper {
-    padding: 15px 15px 7px;
-    font-size: 20px;
-
-    .logo {
-      width: 35px;
-    }
-  }
 
   .item {
     &.active {
@@ -37,4 +28,18 @@
   position: fixed;
   top: 0;
   z-index: 500;
+}
+
+.logo-wrapper {
+  font-size: 20px;
+
+  .logo {
+    width: 35px;
+  }
+}
+
+.sidebar-is-open {
+  .secondary-logo {
+    display: none;
+  }
 }

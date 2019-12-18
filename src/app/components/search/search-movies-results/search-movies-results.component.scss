@@ -59,6 +59,8 @@
     }
 
     .movie-description {
+      text-align: justify;
+      line-height: 2;
       height: 85px;
       max-height: 85px;
       overflow: hidden;

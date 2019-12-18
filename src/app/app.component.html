@@ -8,8 +8,7 @@
               class="sidebar mat-elevation-z7"
               mode="side">
 
-
-    <div class="logo-wrapper flex align-items-center text-white">
+    <div class="logo-wrapper flex align-items-center text-white pt-15 pr-15 pl-15 pb-7">
       <img class="logo mr-10"
            src="../assets/images/movie-slate.png"
            alt="movie-slate-image">
@@ -49,10 +48,6 @@
            routerLink="/search-movies">
           Movies
         </a>
-        <a class="item"
-           mat-list-item>
-          Series
-        </a>
       </div>
     </mat-nav-list>
 
@@ -65,6 +60,15 @@
             (click)="sidebar.toggle()">
       <mat-icon>menu</mat-icon>
     </button>
+
+    <div class="logo-wrapper pl-15 flex align-items-center text-white secondary-logo">
+      <img class="logo mr-10"
+           src="../assets/images/movie-slate.png"
+           alt="movie-slate-image">
+
+      <span class="text-bold">Movie</span>
+      <span class="text-normal">Library</span>
+    </div>
   </mat-toolbar>
   <!-- /Top Menu -->
 

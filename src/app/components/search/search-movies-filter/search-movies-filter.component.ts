@@ -44,8 +44,9 @@ export class SearchMoviesFilterComponent implements OnInit, OnDestroy {
     this.searchFormSubscription = this.form.valueChanges.pipe(
       debounceTime(600)
     ).subscribe(value => {
-      this.inputHasValue = Boolean(value.movieName);
-      this.onSearchKeyUp.emit(value.movieName);
+      const userInput = value.movieName && value.movieName.trim();
+      this.inputHasValue = Boolean(userInput);
+      this.onSearchKeyUp.emit(userInput);
     });
   }
 

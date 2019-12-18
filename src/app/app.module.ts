@@ -38,6 +38,6 @@ import { MovieDetailsComponent } from './components/movie-details/movie-details.
       multi: true
     }
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [ AppComponent ]
 })
 export class AppModule { }

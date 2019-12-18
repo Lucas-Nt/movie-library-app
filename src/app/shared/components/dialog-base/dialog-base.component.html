@@ -1,5 +1,19 @@
+<div class="dialog-header">
+  <h3>Movie Trailer</h3>
+
+  <button mat-mini-fab
+          (click)="closeDialog()"
+          color="primary"
+          class="close-dialog">
+    <mat-icon>
+      close
+    </mat-icon>
+  </button>
+</div>
+
+
 <div *ngIf="trailerUrl"
-     class="h-100-pc">
+     class="pt-45 h-100-pc">
   <iframe width="100%"
           height="100%"
           [src]="trailerUrl"
