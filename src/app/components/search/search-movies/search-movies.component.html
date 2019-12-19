@@ -2,7 +2,7 @@
 <div class="flex justify-space-between search-pager-wrapper mt-20">
 
   <!-- Search Input -->
-  <div class="col-sm-5">
+  <div class="col-sm-4">
     <app-search-movies-filter [form]="searchInputForm"
                               (onSearchKeyUp)="executeSearch($event)"
                               (onClearInput)="resetForm()">
@@ -11,7 +11,7 @@
   <!-- /Search Input -->
 
   <!-- Pager -->
-  <div class="col-sm-7 flex align-items-center justify-flex-end">
+  <div class="col-sm-8 flex align-items-center justify-flex-end">
     <mat-paginator *ngIf="resultValue === resultEnum.ShowResults"
                    class="transparent-background"
                    [length]="totalResults"

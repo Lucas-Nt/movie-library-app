@@ -1,6 +1,8 @@
-<div [formGroup]="form">
+<div class="flex align-items-center"
+     [formGroup]="form">
 
-  <mat-form-field class="search-input"
+  <!-- Search Input  -->
+  <mat-form-field class="search-input p-relative"
                   appearance="outline">
     <mat-label class="text-white">Type a movie title</mat-label>
 
@@ -8,17 +10,21 @@
            formControlName="movieName"
            autocomplete="off">
 
-    <mat-icon *ngIf="inputHasValue; else showSearchIcon"
-              (click)="clearInput()"
-              class="cursor-pointer"
-              matSuffix>
+    <mat-icon matSuffix>search</mat-icon>
+  </mat-form-field>
+  <!-- /Search Input  -->
+
+  <!-- Clear Input Button -->
+  <button *ngIf="inputHasValue"
+          class="p-absolute right-25"
+          (click)="clearInput()"
+          color="primary"
+          mat-raised-button>
+    Clear
+    <mat-icon matSuffix>
       clear
     </mat-icon>
-
-    <ng-template #showSearchIcon>
-      <mat-icon matSuffix>search</mat-icon>
-    </ng-template>
-
-  </mat-form-field>
+  </button>
+  <!-- /Clear Input Button -->
 
 </div>

@@ -3,7 +3,8 @@
 .sidebar {
   width: 290px;
   min-width: 250px;
-  background-color: $secondary-theme-color;
+  background-color: darken($secondary-theme-color, 3);
+  border-color: $secondary-theme-color;
 
   .item {
     &.active {

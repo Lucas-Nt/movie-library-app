@@ -49,6 +49,19 @@ $unit: 'px';
   height: 100%;
 }
 
+// Positioning Classes
+.p-relative {
+  position: relative !important;
+}
+
+.p-absolute {
+  position: absolute !important;
+}
+
+.right-25 {
+  right: 25px;
+}
+
 // Text Classes
 .text-primary {
   color: $main-theme-color !important;
