@@ -8,6 +8,10 @@ import { FormGroup, FormBuilder } from '@angular/forms';
 import { SearchService } from '../search.service';
 import { distinctUntilChanged } from 'rxjs/operators';
 
+enum Results {
+  ShowResults = 'Show Results',
+  NoResultsFound = 'No Results Found'
+}
 
 @Component({
   selector: 'app-search-movies',
@@ -28,13 +32,19 @@ export class SearchMoviesComponent implements OnInit, OnDestroy {
   public results$ = this.searchService.movieResults;
   public results: MovieViewModel[];
   public searchInputForm: FormGroup;
+  public resultEnum = Results;
+
+  public get resultValue(): string {
+    if (this.results === null) {
+      return;
+    }
+
+    return this.results && this.results.length === 0
+            ? this.resultEnum.NoResultsFound
+            : this.resultEnum.ShowResults;
+  }
 
   private _subscriptions = new Subscription();
-
-  get hasResults() {
-    return this.results &&
-           this.results.length > 0;
-  }
 
   ngOnInit(): void {
     this.buildSearchForm();
@@ -90,7 +100,7 @@ export class SearchMoviesComponent implements OnInit, OnDestroy {
     ).subscribe((data: any) => {
 
       if (!data) {
-        this.results = [];
+        this.results = null;
         return;
       }
 
@@ -98,7 +108,11 @@ export class SearchMoviesComponent implements OnInit, OnDestroy {
       const totalPages = data.total_pages;
 
       this.currentIndex = currentPage - 1;
-      this.results = data.results.map(item => this.movieMapper.toViewModel(item));
+
+      this.results = data && data.total_results > 0
+                     ? data.results.map(item => this.movieMapper.toViewModel(item))
+                     : [] ;
+
       this.totalResults = data.total_results;
 
       if (currentPage !== totalPages) {

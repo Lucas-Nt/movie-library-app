@@ -73,11 +73,10 @@
   <!-- /Top Menu -->
 
   <!-- Main Content -->
-  <div class="main-content"
-       [class.search-is-sticky]="isSearchSticky">
+  <app-main-content-wrapper [cssClass]="isSearchSticky ? 'search-is-sticky' : ''">
     <app-spinner></app-spinner>
     <router-outlet></router-outlet>
-  </div>
+  </app-main-content-wrapper>
   <!-- /Main Content -->
 
   <app-scroll-up-button [isVisible]="isScrollUpButtonVisible">

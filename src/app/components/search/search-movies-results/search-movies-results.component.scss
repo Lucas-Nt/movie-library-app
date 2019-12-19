@@ -1,10 +1,9 @@
 @import "../../../../assets/styles/theme.scss";
 
-.results-text {
-  color: white;
-  border-bottom: 5px solid #2f0a29;
-  padding-bottom: 15px;
-  padding-left: 10px;
+.purple-hr {
+  background: linear-gradient(to right, #3e0d41, rgba(255, 255, 0, 0));
+  height: 5px;
+  border: 0
 }
 
 .movie-cards-wrapper {

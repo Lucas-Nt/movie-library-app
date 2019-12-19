@@ -1,36 +1,35 @@
 import { Location } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { first } from 'rxjs/operators';
 import { MatDialog } from '@angular/material';
 import { DialogBaseComponent } from 'src/app/shared/components/dialog-base/dialog-base.component';
+import { BackgroundImageService } from 'src/app/core/services/background-image.service';
 
 @Component({
   selector: 'app-movie-details',
   templateUrl: './movie-details.component.html',
   styleUrls: ['./movie-details.component.scss']
 })
-export class MovieDetailsComponent implements OnInit {
+export class MovieDetailsComponent implements OnInit, OnDestroy {
 
   public movie: any;
-  public backgroundEndpoint = 'https://image.tmdb.org/t/p/w1280/';
   public posterEndpoint = 'https://image.tmdb.org/t/p/w300/';
 
   constructor(private route: ActivatedRoute,
               private dialog: MatDialog,
-              private location: Location) { }
+              private location: Location,
+              private backgroundImageService: BackgroundImageService) { }
 
   ngOnInit() {
     this.route.data.pipe(first()).subscribe(data => {
       this.movie = data.movieDetails;
+      this.backgroundImageService.setBackground(this.movie.backdrop_path);
     });
   }
 
-  public createBackgroundImage(backgroundImage: string): string {
-    const gradientStyle = 'linear-gradient(to bottom, rgba(255, 255, 255, 0) -600%, #24091f 100%)';
-
-    return backgroundImage === null ? `${gradientStyle}`
-                                    : `${gradientStyle}, url(${this.backgroundEndpoint}${backgroundImage})`;
+  ngOnDestroy(): void {
+    this.backgroundImageService.setBackground();
   }
 
   public goToPreviousPage(): void {

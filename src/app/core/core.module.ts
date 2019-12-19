@@ -5,12 +5,14 @@ import { SharedModule } from '../shared/shared.module';
 import { SpinnerComponent } from './components/spinner/spinner.component';
 import { CommonModule } from '@angular/common';
 import { ScrollUpButtonComponent } from './components/scroll-up-button/scroll-up-button.component';
+import { MainContentWrapperComponent } from './components/main-content-wrapper/main-content-wrapper.component';
 
 @NgModule({
   declarations: [
     MenuComponent,
     SpinnerComponent,
-    ScrollUpButtonComponent
+    ScrollUpButtonComponent,
+    MainContentWrapperComponent
   ],
   imports: [
     RouterModule,
@@ -20,7 +22,8 @@ import { ScrollUpButtonComponent } from './components/scroll-up-button/scroll-up
   exports: [
     MenuComponent,
     SpinnerComponent,
-    ScrollUpButtonComponent
+    ScrollUpButtonComponent,
+    MainContentWrapperComponent
   ]
 })
 

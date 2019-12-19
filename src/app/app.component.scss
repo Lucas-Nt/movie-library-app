@@ -1,14 +1,5 @@
 @import "../assets/styles/theme.scss";
 
-.main-content {
-  min-height: 100%;
-  padding-top: 64px;
-  background: linear-gradient(to top right, rgba(0, 0, 0, 0.8), rgba(53, 0, 45, 0.8));
-  background-attachment: fixed;
-  background-position: center;
-  background-repeat: no-repeat;
-}
-
 .sidebar {
   width: 290px;
   min-width: 250px;

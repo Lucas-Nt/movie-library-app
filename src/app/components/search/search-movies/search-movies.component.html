@@ -12,7 +12,7 @@
 
   <!-- Pager -->
   <div class="col-sm-7 flex align-items-center justify-flex-end">
-    <mat-paginator *ngIf="hasResults"
+    <mat-paginator *ngIf="resultValue === resultEnum.ShowResults"
                    class="transparent-background"
                    [length]="totalResults"
                    [pageIndex]="currentIndex"
@@ -27,19 +27,27 @@
 </div>
 <!-- /Search Input And Pager -->
 
-<!-- Results -->
-<app-search-movies-results *ngIf="hasResults; else noResults"
-                           [results]="results">
-</app-search-movies-results>
-<!-- /Results -->
+<div [ngSwitch]="resultValue">
 
-<!-- No Results -->
-<ng-template #noResults>
-  <div class="no-results">
-    <span>No results available</span>
+  <!-- Results -->
+  <div *ngSwitchCase="resultEnum.ShowResults">
+    <app-search-movies-results [results]="results">
+    </app-search-movies-results>
   </div>
-</ng-template>
-<!-- /No Results -->
+  <!-- /Results -->
+
+  <!-- No Results -->
+  <div *ngSwitchCase="resultEnum.NoResultsFound">
+    <div class="no-results">
+      <span>No results found</span>
+    </div>
+  </div>
+  <!-- /No Results -->
+
+</div>
+
+
+
 
 
 
