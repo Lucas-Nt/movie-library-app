@@ -35,3 +35,24 @@
     display: none;
   }
 }
+
+.movie-db-logo {
+  position: fixed;
+  bottom: 25px;
+  right: 35px;
+  z-index: 1;
+
+  img {
+    width: 150px;
+    opacity: 0.2;
+    filter: grayscale(100%);
+    transition: all .2s ease-in;
+
+    &:hover {
+      opacity: 0.5;
+      filter: grayscale(0%);
+      transition: all .2s ease-in;
+    }
+  }
+
+}

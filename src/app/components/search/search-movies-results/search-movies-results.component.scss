@@ -25,6 +25,7 @@
   .movie-card {
     background: #191919;
     box-shadow: 0 0 2px black;
+    z-index: 4;
 
     &:hover {
       box-shadow: 0 0 14px black;

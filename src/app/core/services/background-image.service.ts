@@ -16,7 +16,8 @@ export class BackgroundImageService {
     '../../../assets/images/alien.jpg',
     '../../../assets/images/breakingBad.jpg',
     '../../../assets/images/theMartian.jpg',
-    '../../../assets/images/ironMan.jpg'
+    '../../../assets/images/ironMan.jpg',
+    '../../../assets/images/theMatrix.jpg'
   ];
 
   private _backgroundEndpoint = 'https://image.tmdb.org/t/p/w1280/';

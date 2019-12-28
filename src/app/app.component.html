@@ -79,7 +79,22 @@
   </app-main-content-wrapper>
   <!-- /Main Content -->
 
+  <!-- Movie DB Logo -->
+  <div *ngIf="!isScrollUpButtonVisible"
+       class="movie-db-logo">
+    <a href="https://www.themoviedb.org/"
+       title="Powered By The Movie DB"
+       target="_blank">
+      <img src="./../assets/images/powered-by-mdb.png"
+           alt="Movie DB Logo">
+    </a>
+  </div>
+  <!-- /Movie DB Logo -->
+
+  <!-- Scroll To Top Button -->
   <app-scroll-up-button [isVisible]="isScrollUpButtonVisible">
   </app-scroll-up-button>
+  <!-- /Scroll To Top Button -->
+
 
 </mat-drawer-container>
