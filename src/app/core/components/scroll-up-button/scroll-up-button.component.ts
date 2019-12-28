@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { ScrollingActionsService } from '../../services/scrolling-actions.service';
 
 @Component({
   selector: 'app-scroll-up-button',
@@ -7,13 +8,12 @@ import { Component, Input } from '@angular/core';
 })
 export class ScrollUpButtonComponent {
 
-  constructor() { }
+  constructor(private scrollingActionsService: ScrollingActionsService) { }
 
   @Input() isVisible: boolean;
 
   scrollToTop() {
-    const element = document.getElementsByClassName('mat-drawer-content')[0];
-    element.scrollTo({ top: 0, behavior: 'smooth' });
+    this.scrollingActionsService.scrollToTop('smooth');
   }
 
 }

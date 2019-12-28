@@ -23,7 +23,8 @@ export class MovieDetailsComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.route.data.pipe(first()).subscribe(data => {
-      this.movie = data.movieDetails;
+      this.movie = data.movieDetails[0];
+      this.movie.credits = data.movieDetails[1];
       this.backgroundImageService.setBackground(this.movie.backdrop_path);
     });
   }

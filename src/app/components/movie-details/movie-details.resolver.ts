@@ -3,7 +3,9 @@ import { Resolve, ActivatedRouteSnapshot } from '@angular/router';
 
 import { MovieResource } from '../search/search-movies.resource';
 
-import { Observable } from 'rxjs';
+import { Observable, forkJoin, of } from 'rxjs';
+import { catchError } from 'rxjs/operators';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Injectable({ providedIn: 'root' })
 export class MovieDetailsResolver implements Resolve<any> {
@@ -12,7 +14,14 @@ export class MovieDetailsResolver implements Resolve<any> {
 
   resolve(route: ActivatedRouteSnapshot): Observable<any> {
     const movieID = route.params.id;
-    return this.movieResource.getMovieDetails(movieID);
+    return forkJoin([
+      this.movieResource.getMovieDetails(movieID),
+      this.movieResource.getMovieCredits(movieID).pipe(
+        catchError((error: HttpErrorResponse) => {
+        console.log(error);
+        return of(null);
+      }))
+    ]);
   }
 
 }

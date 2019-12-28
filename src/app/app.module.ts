@@ -25,9 +25,7 @@ import { MovieDetailsComponent } from './components/movie-details/movie-details.
     HttpClientModule,
     BrowserAnimationsModule,
     SearchMoviesModule,
-    RouterModule.forRoot(APP_ROUTES, {
-      scrollPositionRestoration: 'enabled'
-    }),
+    RouterModule.forRoot(APP_ROUTES),
     SharedModule,
     CoreModule
   ],

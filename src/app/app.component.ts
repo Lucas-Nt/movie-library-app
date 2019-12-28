@@ -1,9 +1,12 @@
 import { CdkScrollable, ScrollDispatcher } from '@angular/cdk/overlay';
 import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';
-import { debounceTime } from 'rxjs/operators';
+import { Subscription, zip } from 'rxjs';
+import { debounceTime, distinctUntilChanged, filter } from 'rxjs/operators';
 import { NavigationEnd, Router } from '@angular/router';
 import { SearchService } from './components/search/search.service';
+import { ScrollingActionsService } from './core/services/scrolling-actions.service';
+import { areAllItemsNull } from './shared/generic-utilities';
+import _isEqual from 'lodash/isEqual';
 
 @Component({
   selector: 'app-root',
@@ -13,33 +16,46 @@ import { SearchService } from './components/search/search.service';
 
 export class AppComponent implements OnInit, OnDestroy {
 
-  areSearchOptionsVisible: boolean;
-  isSearchSticky: boolean;
-  isScrollUpButtonVisible: boolean;
+  public areSearchOptionsVisible: boolean;
+  public isSearchBarSticky: boolean;
+  public isScrollUpButtonVisible: boolean;
 
   private _subscriptions = new Subscription();
 
   constructor(private scrollDispatcher: ScrollDispatcher,
               private router: Router,
+              private cdr: ChangeDetectorRef,
               private searchService: SearchService,
-              private cdr: ChangeDetectorRef) {}
+              private scrollingActionsService: ScrollingActionsService) {}
 
   ngOnInit(): void {
 
     const routingSubscription = this.router.events.subscribe(event => {
-      // Scroll to top if accessing a page, not via browser history stack
       if (event instanceof NavigationEnd) {
-        const contentContainer = document.querySelector('.mat-drawer-content') || window;
-        contentContainer.scrollTo(0, 0);
+        this.scrollingActionsService.scrollToTop();
         this.searchService.evaluateDataClearing(event.url);
       }
-
     });
 
     const scrollingSubscription = this.scrollDispatcher.scrolled()
                                   .pipe(debounceTime(200))
-                                  .subscribe((data: CdkScrollable) => this.initiateScrollingActions(data));
+                                  .subscribe((data: CdkScrollable) =>
+                                    this.scrollingActionsService.initiateScrollingFlagsCheck(data)
+                                  );
 
+    const scrollingFlagsSubscription = zip(
+      this.scrollingActionsService.isSearchBarSticky,
+      this.scrollingActionsService.isScrollUpButtonVisible
+    ).pipe(
+      filter(values => !areAllItemsNull(values)),
+      distinctUntilChanged(_isEqual)
+    ).subscribe((statuses: boolean[]) => {
+      this.isSearchBarSticky = statuses[0];
+      this.isScrollUpButtonVisible = statuses[1];
+      this.cdr.detectChanges();
+    });
+
+    this._subscriptions.add(scrollingFlagsSubscription);
     this._subscriptions.add(routingSubscription);
     this._subscriptions.add(scrollingSubscription);
   }
@@ -48,40 +64,8 @@ export class AppComponent implements OnInit, OnDestroy {
     this._subscriptions.unsubscribe();
   }
 
-  toggleSearchMenuOptions(): void {
+  public toggleSearchMenuOptions(): void {
     this.areSearchOptionsVisible = !this.areSearchOptionsVisible;
-  }
-
-  private initiateScrollingActions(data: CdkScrollable): void {
-    const topOffset = data.getElementRef().nativeElement.scrollTop || 0;
-    const hasScrolledDown = topOffset > 100 ? true : false;
-
-    if (hasScrolledDown) {
-      this.showStickySearchBar(true);
-      this.showScrollUpButton(true);
-    } else {
-      this.showScrollUpButton(false);
-      this.showStickySearchBar(false);
-    }
-
-  }
-
-  private showScrollUpButton(status: boolean): void {
-    this.isScrollUpButtonVisible = status;
-    this.cdr.detectChanges();
-  }
-
-  private showStickySearchBar(status: boolean) {
-    const isInSearchPage = window.location.href.includes('search');
-
-    if (!isInSearchPage) {
-      this.isSearchSticky = false;
-      this.cdr.detectChanges();
-      return;
-    }
-
-    this.isSearchSticky = status;
-    this.cdr.detectChanges();
   }
 
 }

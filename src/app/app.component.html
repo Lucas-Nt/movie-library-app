@@ -73,7 +73,7 @@
   <!-- /Top Menu -->
 
   <!-- Main Content -->
-  <app-main-content-wrapper [cssClass]="isSearchSticky ? 'search-is-sticky' : ''">
+  <app-main-content-wrapper [class.search-is-sticky]="isSearchBarSticky">
     <app-spinner></app-spinner>
     <router-outlet></router-outlet>
   </app-main-content-wrapper>

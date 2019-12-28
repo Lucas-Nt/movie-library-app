@@ -8,21 +8,28 @@ import { Observable } from 'rxjs';
 export class MovieResource {
 
   private apiKey = '13c46c78a5aa0ee1329947ed2ea96a82';
+  private baseUrl = 'https://api.themoviedb.org/3';
 
   constructor(private http: HttpClient) {}
 
   getMovies(name: string, page?: number): Observable<PagedResponse<MovieModel>> {
-    const url = 'https://api.themoviedb.org/3/search';
+    const url = `${this.baseUrl}/search`;
 
     return this.http.get(`${url}/movie?api_key=${this.apiKey}&query=${name}&page=${page}`).pipe(
       map(response => response as PagedResponse<MovieModel>)
     );
   }
 
-  getMovieDetails(movieID: number) {
-    const url = 'https://api.themoviedb.org/3/movie';
+  getMovieDetails(movieID: number): Observable<any> {
+    const url = `${this.baseUrl}/movie`;
 
     return this.http.get(`${url}/${movieID}?api_key=${this.apiKey}&append_to_response=videos`);
+  }
+
+  getMovieCredits(movieID: number): Observable<any> {
+    const url = `${this.baseUrl}/movie/${movieID}/credits`;
+
+    return this.http.get(`${url}?api_key=${this.apiKey}`);
   }
 
 }
