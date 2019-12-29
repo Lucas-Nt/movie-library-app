@@ -8,8 +8,6 @@
     z-index: 5;
 
     .movie-header {
-      display: flex;
-      align-items: center;
       padding: 40px 10px;
 
       h1 {
@@ -39,7 +37,6 @@
       .description {
         text-align: justify;
         line-height: 2.5;
-        max-width: 70%;
         color: #adadad; // TODO: replace with variable
       }
     }

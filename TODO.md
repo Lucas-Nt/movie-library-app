@@ -1,7 +1,15 @@
 # TODO
 
-- See More Button with Dialog for Movie Summary
+- Support tv shows / Reuse existing implementation for movies
+- Responsiveness
 - Main Actors Component
-- Spinner position when sidebar closed
-- Object doesn't support property or method 'fill' - IE issue
+- See full cast with dialog
+- See full summary with Dialog
 - NGRX
+- Object doesn't support property or method 'fill' - IE issue
+- Check scrollbar issue firefox
+- Deploy app
+
+# DONE:
+- Spinner position when sidebar closed
+- dynamic ratings component
