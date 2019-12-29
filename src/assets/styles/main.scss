@@ -69,6 +69,12 @@ body {
   .mat-card-header-text {
     margin-left: 0 !important;
     max-width: 70%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .mat-card-subtitle {
+    margin-bottom: 0 !important;
   }
 }
 

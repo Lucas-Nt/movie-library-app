@@ -1,0 +1,22 @@
+.rating-circle-container {
+  position: relative;
+
+  svg {
+    transform: rotate(-90deg);
+    filter: drop-shadow(0 0 10px rgba(0, 0, 0, .5));
+    display: block;
+  }
+
+  .rating-score {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    position: absolute;
+    text-align: center;
+
+    span {
+      font-weight: bold;
+    }
+  }
+}

@@ -3,10 +3,10 @@
 
   <!-- Search Input -->
   <div class="col-sm-6 col-md-5">
-    <app-search-movies-filter [form]="searchInputForm"
+    <app-search-movies-input [form]="searchInputForm"
                               (onSearchKeyUp)="executeSearch($event)"
                               (onClearInput)="resetForm()">
-    </app-search-movies-filter>
+    </app-search-movies-input>
   </div>
   <!-- /Search Input -->
 

@@ -6,7 +6,7 @@ import { CdkScrollable } from '@angular/cdk/overlay';
   providedIn: 'root'
 })
 
-export class ScrollingActionsService {
+export class ScrollActionsService {
 
   public isScrollUpButtonVisible = new BehaviorSubject<boolean>(null);
   public isSearchBarSticky = new BehaviorSubject<boolean>(null);

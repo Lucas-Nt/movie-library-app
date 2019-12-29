@@ -1,4 +1,5 @@
 import { DialogBaseModule } from './components/dialog-base/dialog-base.module';
+import { RatingCircleModule } from './components/rating-circle/rating-circle.module';
 import { MovieMapper } from './mappers/movie.mapper';
 import { RuntimePipe } from './pipes/runtime.pipe';
 import { SafePipe } from './pipes/safe.pipe';
@@ -17,5 +18,6 @@ export const MAPPERS = [
 ];
 
 export const COMPONENTS = [
-  DialogBaseModule
+  DialogBaseModule,
+  RatingCircleModule
 ];

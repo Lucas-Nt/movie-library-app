@@ -28,23 +28,6 @@
         display: flex;
         padding-left: 30px;
       }
-
-      // TODO: remove this and create a mixin maybe??
-      .movie-rating {
-        margin-left: auto;
-        margin-right: 25px;
-        font-size: 20px;
-        width: 60px;
-        height: 60px;
-        border: 5px solid darken($main-theme-color, 5);
-        text-align: center;
-        padding: 10px 0;
-        font-weight: bold;
-        color: #cbcbcb;
-        box-shadow: 0 0 3px $main-theme-color;
-        background: #101010;
-        border-radius: 50%;
-      }
     }
 
     .main-movie-info {

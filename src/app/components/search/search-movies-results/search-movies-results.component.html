@@ -7,21 +7,33 @@
   <div *ngFor="let movie of results; trackBy: movieTrackBy"
        class="col-xs-12 col-sm-6 col-md-4 col-lg-3 min-width-350">
 
-    <mat-card class="movie-card mat-elevation-z10 mb-20"
+    <mat-card class="movie-card mat-elevation-z10 pt-8 mb-20"
               (click)="goToDetails(movie.id)"
               title="{{ movie.title }}">
-      <mat-card-header class="movie-header flex flex-row-reverse justify-space-between">
-        <mat-card-title class="fs-17 mb-8 truncate-title">
+
+      <!-- Header -->
+      <mat-card-header class="movie-header pb-8 flex justify-space-between align-items-center">
+
+        <!-- Title -->
+        <mat-card-title class="fs-17 truncate-title">
           {{ movie.title }}
         </mat-card-title>
+        <!-- /Title -->
+
+        <!-- Year of Release -->
         <mat-card-subtitle>
           {{ movie.releaseDate | yearOnly }}
         </mat-card-subtitle>
-        <div class="movie-rating"
-             mat-card-avatar>
-          {{ movie.rating }}
-        </div>
+        <!-- /Year of Release -->
+
+        <!-- Movie Rating -->
+        <app-rating-circle [rating]="movie.rating"
+                           [customClass]="'w-65 left-10'">
+        </app-rating-circle>
+        <!-- /Movie Rating -->
+
       </mat-card-header>
+      <!-- /Header -->
 
       <!-- Movie Poster -->
       <img *ngIf="hasMovieImage(imgEndpoint+movie.poster); else noMovieImage"
@@ -40,10 +52,12 @@
       </ng-template>
       <!-- /No Image Available -->
 
-
+      <!-- Brief Summary -->
       <mat-card-content class="movie-description text-light-white">
         <p>{{ movie.description | truncateText:145 }}</p>
       </mat-card-content>
+      <!-- /Brief Summary -->
+
     </mat-card>
 
   </div>

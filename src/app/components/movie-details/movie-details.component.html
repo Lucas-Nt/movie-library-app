@@ -1,7 +1,7 @@
 <div class="movie-detail-wrapper flex">
 
   <div class="movie-details-top col-md-12">
-    <div class="movie-header">
+    <div class="movie-header align-items-center">
 
       <!-- Movie Title -->
       <h1 class="inline-block fs-35">
@@ -29,9 +29,9 @@
       <!-- /Genre Tags -->
 
       <!-- Movie Rating -->
-      <div class="movie-rating">
-        {{ movie.vote_average }}
-      </div>
+      <app-rating-circle [rating]="movie.vote_average"
+                         [customClass]="'w-90 fs-24'">
+      </app-rating-circle>
       <!-- /Movie Rating -->
 
     </div>

@@ -5,11 +5,11 @@ import { Subscription } from 'rxjs';
 import { SearchService } from '../search.service';
 
 @Component({
-  selector: 'app-search-movies-filter',
-  templateUrl: './search-movies-filter.component.html',
-  styleUrls: ['./search-movies-filter.component.scss']
+  selector: 'app-search-movies-input',
+  templateUrl: './search-movies-input.component.html',
+  styleUrls: ['./search-movies-input.component.scss']
 })
-export class SearchMoviesFilterComponent implements OnInit, OnDestroy {
+export class SearchMoviesInputComponent implements OnInit, OnDestroy {
 
   @Input() form: FormGroup;
   @Output() onSearchKeyUp = new EventEmitter();

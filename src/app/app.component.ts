@@ -4,7 +4,7 @@ import { Subscription, zip } from 'rxjs';
 import { debounceTime, distinctUntilChanged, filter } from 'rxjs/operators';
 import { NavigationEnd, Router } from '@angular/router';
 import { SearchService } from './components/search/search.service';
-import { ScrollingActionsService } from './core/services/scrolling-actions.service';
+import { ScrollActionsService } from './core/services/scroll-actions.service';
 import { areAllItemsNull } from './shared/generic-utilities';
 import _isEqual from 'lodash/isEqual';
 
@@ -26,13 +26,13 @@ export class AppComponent implements OnInit, OnDestroy {
               private router: Router,
               private cdr: ChangeDetectorRef,
               private searchService: SearchService,
-              private scrollingActionsService: ScrollingActionsService) {}
+              private scrollActionsService: ScrollActionsService) {}
 
   ngOnInit(): void {
 
     const routingSubscription = this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
-        this.scrollingActionsService.scrollToTop();
+        this.scrollActionsService.scrollToTop();
         this.searchService.evaluateDataClearing(event.url);
       }
     });
@@ -40,12 +40,12 @@ export class AppComponent implements OnInit, OnDestroy {
     const scrollingSubscription = this.scrollDispatcher.scrolled()
                                   .pipe(debounceTime(200))
                                   .subscribe((data: CdkScrollable) =>
-                                    this.scrollingActionsService.initiateScrollingFlagsCheck(data)
+                                    this.scrollActionsService.initiateScrollingFlagsCheck(data)
                                   );
 
-    const scrollingFlagsSubscription = zip(
-      this.scrollingActionsService.isSearchBarSticky,
-      this.scrollingActionsService.isScrollUpButtonVisible
+    const scrollFlagsSubscription = zip(
+      this.scrollActionsService.isSearchBarSticky,
+      this.scrollActionsService.isScrollUpButtonVisible
     ).pipe(
       filter(values => !areAllItemsNull(values)),
       distinctUntilChanged(_isEqual)
@@ -55,7 +55,7 @@ export class AppComponent implements OnInit, OnDestroy {
       this.cdr.detectChanges();
     });
 
-    this._subscriptions.add(scrollingFlagsSubscription);
+    this._subscriptions.add(scrollFlagsSubscription);
     this._subscriptions.add(routingSubscription);
     this._subscriptions.add(scrollingSubscription);
   }

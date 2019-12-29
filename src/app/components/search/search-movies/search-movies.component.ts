@@ -7,6 +7,7 @@ import { MovieViewModel } from 'src/app/shared/models/movie.model';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { SearchService } from '../search.service';
 import { distinctUntilChanged } from 'rxjs/operators';
+import { ScrollActionsService } from 'src/app/core/services/scroll-actions.service';
 
 enum Results {
   ShowResults = 'Show Results',
@@ -23,6 +24,7 @@ export class SearchMoviesComponent implements OnInit, OnDestroy {
   constructor(private movieResource: MovieResource,
               private fb: FormBuilder,
               private searchService: SearchService,
+              private scrollActionsService: ScrollActionsService,
               private movieMapper: MovieMapper) {}
 
   public storedParameter: string;
@@ -78,6 +80,7 @@ export class SearchMoviesComponent implements OnInit, OnDestroy {
 
   public changePage(event: PageEvent): void {
     this.executeSearch(this.searchService.lastMovieSearchParam, event);
+    this.scrollActionsService.scrollToTop();
   }
 
   private pageToRequest(pageEventObject: PageEvent): number {

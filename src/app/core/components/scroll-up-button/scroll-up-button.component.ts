@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { ScrollingActionsService } from '../../services/scrolling-actions.service';
+import { ScrollActionsService } from '../../services/scroll-actions.service';
 
 @Component({
   selector: 'app-scroll-up-button',
@@ -8,12 +8,12 @@ import { ScrollingActionsService } from '../../services/scrolling-actions.servic
 })
 export class ScrollUpButtonComponent {
 
-  constructor(private scrollingActionsService: ScrollingActionsService) { }
+  constructor(private scrollActionsService: ScrollActionsService) { }
 
   @Input() isVisible: boolean;
 
   scrollToTop() {
-    this.scrollingActionsService.scrollToTop('smooth');
+    this.scrollActionsService.scrollToTop('smooth');
   }
 
 }
