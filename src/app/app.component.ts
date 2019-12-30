@@ -19,6 +19,7 @@ export class AppComponent implements OnInit, OnDestroy {
   public areSearchOptionsVisible: boolean;
   public isSearchBarSticky: boolean;
   public isScrollUpButtonVisible: boolean;
+  public shouldOpenSideBar: boolean;
 
   private _subscriptions = new Subscription();
 
@@ -29,6 +30,7 @@ export class AppComponent implements OnInit, OnDestroy {
               private scrollActionsService: ScrollActionsService) {}
 
   ngOnInit(): void {
+    this.evaluateSidebarVisibility();
 
     const routingSubscription = this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
@@ -66,6 +68,11 @@ export class AppComponent implements OnInit, OnDestroy {
 
   public toggleSearchMenuOptions(): void {
     this.areSearchOptionsVisible = !this.areSearchOptionsVisible;
+  }
+
+  private evaluateSidebarVisibility(): void {
+    const isSmallScreen = window.innerWidth < 1300;
+    this.shouldOpenSideBar = isSmallScreen ? false : true;
   }
 
 }
