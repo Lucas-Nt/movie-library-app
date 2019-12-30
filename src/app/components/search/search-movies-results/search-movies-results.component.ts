@@ -10,6 +10,7 @@ export class SearchMoviesResultsComponent {
 
   constructor(private router: Router) {}
 
+  @Input() searchType: string;
   @Input() results: any;
 
   imgEndpoint = 'https://image.tmdb.org/t/p/w500/';
@@ -23,7 +24,8 @@ export class SearchMoviesResultsComponent {
   }
 
   goToDetails(id: number): void {
-    this.router.navigate(['movie-details/' + id]);
+    this.searchType === 'Movie' ? this.router.navigate(['movie-details/' + id])
+                                : this.router.navigate(['tv-show-details/' + id]);
   }
 
 }

@@ -11,7 +11,8 @@ import {
   MatCardModule,
   MatPaginatorModule,
   MatChipsModule,
-  MatDialogModule
+  MatDialogModule,
+  MatRadioModule
 } from '@angular/material';
 
 import { MatIconModule } from '@angular/material/icon';
@@ -29,7 +30,8 @@ import { MatIconModule } from '@angular/material/icon';
     MatCardModule,
     MatPaginatorModule,
     MatChipsModule,
-    MatDialogModule
+    MatDialogModule,
+    MatRadioModule
   ],
   exports: [
     MatInputModule,
@@ -43,7 +45,8 @@ import { MatIconModule } from '@angular/material/icon';
     MatCardModule,
     MatPaginatorModule,
     MatChipsModule,
-    MatDialogModule
+    MatDialogModule,
+    MatRadioModule
   ]
 })
 

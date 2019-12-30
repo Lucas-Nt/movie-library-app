@@ -3,6 +3,7 @@ import { SearchMoviesInputComponent } from './search-movies-input/search-movies-
 import { SearchMoviesResultsComponent } from './search-movies-results/search-movies-results.component';
 
 import { MovieResource } from './search-movies.resource';
+import { TvShowResource } from './search-tv-shows.resource';
 import { SearchService } from './search.service';
 
 export const COMPONENTS = [
@@ -12,6 +13,7 @@ export const COMPONENTS = [
 ];
 
 export const RESOURCES = [
+  TvShowResource,
   MovieResource
 ];
 

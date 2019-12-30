@@ -58,6 +58,14 @@ $unit: 'px';
   position: absolute !important;
 }
 
+.top-15 {
+  top: 15px;
+}
+
+.right-10 {
+  right: 10px;
+}
+
 .right-25 {
   right: 25px;
 }
@@ -123,6 +131,10 @@ $unit: 'px';
 
 .flex-column {
   flex-direction: column;
+}
+
+.flex-1 {
+  flex: 1;
 }
 // End of Flexbox Classes
 

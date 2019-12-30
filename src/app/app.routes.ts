@@ -11,6 +11,15 @@ export const APP_ROUTES: Routes = [
   {
     path: 'movie-details/:id',
     component: MovieDetailsComponent,
+    data: { searchType: 'Movie' }, // TODO: check if data should be passed from navigate action
+    resolve: {
+      movieDetails: MovieDetailsResolver
+    }
+  },
+  {
+    path: 'tv-show-details/:id',
+    component: MovieDetailsComponent,
+    data: { searchType: 'TV_Show' },
     resolve: {
       movieDetails: MovieDetailsResolver
     }

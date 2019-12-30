@@ -15,7 +15,10 @@ body {
 // TODO: create an overrides file to move the styles below
 .sidebar-is-open {
   .search-is-sticky {
-    margin-top: 90px;
+
+    .scroll-height {
+      height: 85px;
+    }
 
     .search-pager-wrapper {
       position: fixed;
@@ -59,6 +62,10 @@ body {
 
 .search-input {
   width: 100%;
+
+  input {
+    caret-color: white;
+  }
 
   .mat-form-field-wrapper {
     padding: 0 !important;

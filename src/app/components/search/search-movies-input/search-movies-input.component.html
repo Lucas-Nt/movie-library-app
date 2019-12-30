@@ -1,31 +1,58 @@
 <div class="flex align-items-center"
      [formGroup]="form">
 
-  <!-- Search Input  -->
-  <mat-form-field class="search-input p-relative"
-                  appearance="outline">
-    <mat-label class="text-white">Type a movie title</mat-label>
+  <div class="flex flex-1 p-relative">
+    <!-- Search Input  -->
+    <mat-form-field class="search-input p-relative"
+                    appearance="outline">
+      <mat-label class="text-white">
+        <span *ngIf="form.get('searchType').value === 'Movie'; else typeTvShowTitle">
+          Type a movie title
+        </span>
+        <ng-template #typeTvShowTitle>
+          <span>
+            Type a tv show title
+          </span>
+        </ng-template>
+      </mat-label>
 
-    <input matInput
-           formControlName="movieName"
-           autocomplete="off">
+      <input matInput
+             formControlName="title"
+             autocomplete="off">
 
-    <mat-icon matSuffix>search</mat-icon>
-  </mat-form-field>
-  <!-- /Search Input  -->
+      <mat-icon matSuffix>search</mat-icon>
+    </mat-form-field>
+    <!-- /Search Input  -->
 
-  <!-- Clear Input Button -->
-  <button *ngIf="inputHasValue"
-          class="p-absolute right-25"
-          (click)="clearInput()"
-          color="primary"
-          mat-raised-button>
-    Clear
-    <mat-icon class="pl-10"
-              matSuffix>
-      clear
-    </mat-icon>
-  </button>
-  <!-- /Clear Input Button -->
+    <!-- Clear Input Button -->
+    <button *ngIf="inputHasValue"
+            class="p-absolute top-15 right-10"
+            (click)="clearInput()"
+            color="primary"
+            mat-raised-button>
+      Clear
+      <mat-icon class="pl-10"
+                matSuffix>
+        clear
+      </mat-icon>
+    </button>
+    <!-- /Clear Input Button -->
+  </div>
+
+  <mat-radio-group class="flex ml-20"
+                   formControlName="searchType"
+                   aria-label="Select an option">
+    <mat-radio-button color="primary"
+                      value="Movie"
+                      [checked]="isMovieChecked">
+      Movie
+    </mat-radio-button>
+    <mat-radio-button color="primary"
+                      class="ml-15"
+                      value="TV Show"
+                      [checked]="isTvShowChecked">
+      TV Show
+    </mat-radio-button>
+  </mat-radio-group>
 
 </div>

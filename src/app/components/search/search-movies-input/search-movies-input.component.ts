@@ -17,17 +17,29 @@ export class SearchMoviesInputComponent implements OnInit, OnDestroy {
 
   public searchFormSubscription: Subscription;
   public inputHasValue: boolean;
+  public isMovieChecked = true;
+  public isTvShowChecked = false;
 
   constructor(private searchService: SearchService) { }
 
   ngOnInit(): void {
+    this.form.patchValue({ searchType: 'Movie' });
     this.watchFormValueChanges();
 
-    if (this.searchService.lastMovieSearchParam) {
+    const hasTitle = this.searchService.lastMovieSearchParams &&
+                     this.searchService.lastMovieSearchParams.title;
+
+    if (hasTitle) {
       this.form.patchValue(
-        { movieName: this.searchService.lastMovieSearchParam },
+        {
+          title: this.searchService.lastMovieSearchParams.title,
+          searchType: this.searchService.lastMovieSearchParams.searchType
+         },
         { emitEvent: false }
       );
+
+      this.isMovieChecked = this.searchService.lastMovieSearchParams.searchType === 'Movie';
+      this.isTvShowChecked = !this.isMovieChecked;
       this.inputHasValue = true;
     }
   }
@@ -44,9 +56,9 @@ export class SearchMoviesInputComponent implements OnInit, OnDestroy {
     this.searchFormSubscription = this.form.valueChanges.pipe(
       debounceTime(600)
     ).subscribe(value => {
-      const userInput = value.movieName && value.movieName.trim();
+      const userInput = value.title && value.title.trim();
       this.inputHasValue = Boolean(userInput);
-      this.onSearchKeyUp.emit(userInput);
+      this.onSearchKeyUp.emit({ title: userInput, searchType: value.searchType });
     });
   }
 

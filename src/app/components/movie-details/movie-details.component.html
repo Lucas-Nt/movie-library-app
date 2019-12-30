@@ -16,12 +16,12 @@
           </mat-icon>
           <!-- /Go Back Icon -->
 
-          {{ movie.original_title }} {{ movie.release_date | yearOnly }}
+          {{ data.title }} {{ data.releaseDate | yearOnly }}
         </h1>
 
         <!-- Genre Tags -->
         <mat-chip-list class="genre-tags">
-          <mat-chip *ngFor="let genre of movie?.genres"
+          <mat-chip *ngFor="let genre of data?.genres"
                     color="primary"
                     selected>
             {{ genre.name }}
@@ -31,7 +31,7 @@
       </div>
 
       <!-- Movie Rating -->
-      <app-rating-circle [rating]="movie.vote_average"
+      <app-rating-circle [rating]="data.rating"
                          [customClass]="'w-90 fs-24 mr-20'">
       </app-rating-circle>
       <!-- /Movie Rating -->
@@ -42,7 +42,7 @@
 
       <!-- Movie Poster -->
       <img class="mat-elevation-z11"
-           [src]="posterEndpoint+movie?.poster_path">
+           [src]="posterEndpoint+data?.posterPath">
       <!-- /Movie Poster -->
 
       <!-- Other Movie Info -->
@@ -50,7 +50,7 @@
 
         <!-- Description -->
         <p class="description text-light-white">
-          {{ movie.overview | truncateText:295 }}
+          {{ data.description | truncateText:295 }}
         </p>
         <!-- /Description -->
 
@@ -59,16 +59,16 @@
           <button class="mb-15"
                   mat-raised-button
                   color="primary"
-                  [disabled]="!movie.videos.results.length"
-                  (click)="openTrailerDialog(movie.videos.results[0].key)">
+                  [disabled]="!data.youTubeVideoKey"
+                  (click)="openTrailerDialog(data.youTubeVideoKey)">
             <mat-icon>videocam</mat-icon>
-            {{ movie.videos.results.length ? 'See trailer' : 'No Trailer Available' }}
+            {{ data.youTubeVideoKey ? 'See trailer' : 'No Trailer Available' }}
           </button>
 
           <!-- Runtime Info -->
           <div class="pb-15">
             <strong class="pr-10">Runtime:</strong>
-            <span class="text-light-white">{{movie.runtime | runtime}}</span>
+            <span class="text-light-white">{{data.runtime | runtime}}</span>
           </div>
           <!-- /Runtime Info -->
 
@@ -76,11 +76,11 @@
           <div class="pb-15">
             <strong class="pr-10">Movie website:</strong>
 
-            <a *ngIf="movie?.homepage; else empty"
+            <a *ngIf="data?.homepage; else empty"
                class="text-primary"
-               [href]="movie?.homepage"
+               [href]="data?.homepage"
                target="_blank">
-              {{ movie.homepage }}
+              {{ data.homepage }}
             </a>
 
             <ng-template #empty>
