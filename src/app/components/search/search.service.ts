@@ -1,5 +1,8 @@
 import { Injectable } from '@angular/core';
+
 import { BehaviorSubject } from 'rxjs';
+
+import { SearchType } from 'src/app/shared/enums/search-type.enum';
 import { SearchParams } from './search-movies/search-movies.component';
 
 @Injectable()
@@ -10,7 +13,7 @@ export class SearchService {
 
   private _defaultSearchParams: SearchParams = {
     title: '',
-    searchType: 'Movie'
+    searchType: SearchType.MOVIE
   };
 
   public evaluateDataClearing(url: string): void {

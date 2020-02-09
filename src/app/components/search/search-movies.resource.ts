@@ -1,35 +1,42 @@
-import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { map } from 'rxjs/operators';
-import { MovieModel } from 'src/app/shared/models/movie-tv-show.model';
+import { Injectable } from '@angular/core';
+
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+
+import { MovieModel } from 'src/app/shared/models/movie-tv-show.model';
+import { getQueryParams, MOVIE_DB_BASE_URL } from 'src/app/shared/utilities/resource-utilities';
 
 @Injectable()
 export class MovieResource {
 
-  private apiKey = '13c46c78a5aa0ee1329947ed2ea96a82';
-  private baseUrl = 'https://api.themoviedb.org/3';
+  private baseUrl = MOVIE_DB_BASE_URL;
 
   constructor(private http: HttpClient) {}
 
-  getMovies(name: string, page?: number): Observable<PagedResponse<MovieModel>> {
-    const url = `${this.baseUrl}/search`;
+  public getMovies(name: string, page?: number): Observable<PagedResponse<MovieModel>> {
+    const url = `${this.baseUrl}/search/movie`;
+    const params = { query: name, page };
+    const queryParams = getQueryParams(params);
 
-    return this.http.get(`${url}/movie?api_key=${this.apiKey}&query=${name}&page=${page}`).pipe(
+    return this.http.get(url, { params: queryParams }).pipe(
       map(response => response as PagedResponse<MovieModel>)
     );
   }
 
-  getMovieDetails(movieID: number): Observable<any> {
-    const url = `${this.baseUrl}/movie`;
+  public getMovieDetails(movieID: number): Observable<any> {
+    const url = `${this.baseUrl}/movie/${movieID}`;
+    const params = { append_to_response: 'videos' };
+    const queryParams = getQueryParams(params);
 
-    return this.http.get(`${url}/${movieID}?api_key=${this.apiKey}&append_to_response=videos`);
+    return this.http.get(url, { params: queryParams });
   }
 
-  getMovieCredits(movieID: number): Observable<any> {
+  public getMovieCredits(movieID: number): Observable<any> {
     const url = `${this.baseUrl}/movie/${movieID}/credits`;
+    const queryParams = getQueryParams();
 
-    return this.http.get(`${url}?api_key=${this.apiKey}`);
+    return this.http.get(url, { params: queryParams });
   }
 
 }

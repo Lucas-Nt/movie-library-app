@@ -1,10 +1,13 @@
 import { Location } from '@angular/common';
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { first } from 'rxjs/operators';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material';
-import { DialogBaseComponent } from 'src/app/shared/components/dialog-base/dialog-base.component';
+import { ActivatedRoute } from '@angular/router';
+
+import { first } from 'rxjs/operators';
+
 import { BackgroundImageService } from 'src/app/core/services/background-image.service';
+import { DialogBaseComponent } from 'src/app/shared/components/dialog-base/dialog-base.component';
+import { SearchType } from 'src/app/shared/enums/search-type.enum';
 import { MovieTvShowMapper } from 'src/app/shared/mappers/movie-tv-show.mapper';
 
 @Component({
@@ -24,11 +27,10 @@ export class MovieDetailsComponent implements OnInit, OnDestroy {
               private movieTvShowMapper: MovieTvShowMapper,
               private backgroundImageService: BackgroundImageService) { }
 
-  ngOnInit() {
+  public ngOnInit() {
     this.route.data.pipe(first()).subscribe(data => {
-      this.isMovie = data.searchType === 'Movie';
+      this.isMovie = data.searchType === SearchType.MOVIE;
 
-      // TODO: rename 'movie'
       this.data = this.isMovie ? this.movieTvShowMapper.toMovieDetailViewModel(data.movieDetails[0])
                                : this.movieTvShowMapper.toTvShowDetailViewModel(data.movieDetails[0]);
 
@@ -37,7 +39,7 @@ export class MovieDetailsComponent implements OnInit, OnDestroy {
     });
   }
 
-  ngOnDestroy(): void {
+  public ngOnDestroy(): void {
     this.backgroundImageService.setBackground();
   }
 

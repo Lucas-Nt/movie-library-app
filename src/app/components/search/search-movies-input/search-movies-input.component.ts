@@ -4,12 +4,8 @@ import { FormGroup } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 
+import { SearchType } from 'src/app/shared/enums/search-type.enum';
 import { SearchService } from '../search.service';
-
-export enum SearchType {
-  MOVIE = 'Movie',
-  TV_SHOW = 'TV Show'
-}
 
 @Component({
   selector: 'app-search-movies-input',

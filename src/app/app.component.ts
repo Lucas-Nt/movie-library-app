@@ -1,14 +1,16 @@
 import { CdkScrollable, ScrollDispatcher } from '@angular/cdk/overlay';
 import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
+import { NavigationEnd, Router } from '@angular/router';
+
+import { isEqual } from 'lodash';
 import { Subscription, zip } from 'rxjs';
 import { debounceTime, distinctUntilChanged, filter } from 'rxjs/operators';
-import { NavigationEnd, Router } from '@angular/router';
+
 import { SearchService } from './components/search/search.service';
-import { ScrollActionsService } from './core/services/scroll-actions.service';
-import { areAllItemsNull } from './shared/generic-utilities';
-import { isEqual } from 'lodash';
-import { SpinnerService } from './core/services/spinner.service';
 import { SpinnerState } from './core/components/spinner/spinner';
+import { ScrollActionsService } from './core/services/scroll-actions.service';
+import { SpinnerService } from './core/services/spinner.service';
+import { areAllItemsNull } from './shared/utilities/generic-utilities';
 
 @Component({
   selector: 'app-root',
@@ -33,7 +35,7 @@ export class AppComponent implements OnInit, OnDestroy {
               private spinnerService: SpinnerService,
               private scrollActionsService: ScrollActionsService) {}
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
     this.isSmallScreen = window.innerWidth < 1300;
 
     const spinnerSubscription = this.spinnerService.spinnerState
@@ -72,7 +74,7 @@ export class AppComponent implements OnInit, OnDestroy {
     this._subscriptions.add(scrollFlagsSubscription);
   }
 
-  ngOnDestroy(): void {
+  public ngOnDestroy(): void {
     this._subscriptions.unsubscribe();
   }
 

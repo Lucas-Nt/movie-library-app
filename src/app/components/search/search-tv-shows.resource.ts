@@ -5,33 +5,38 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { TvShowModel } from 'src/app/shared/models/movie-tv-show.model';
+import { getQueryParams, MOVIE_DB_BASE_URL } from 'src/app/shared/utilities/resource-utilities';
 
 @Injectable()
 export class TvShowResource {
 
-  private apiKey = '13c46c78a5aa0ee1329947ed2ea96a82';
-  private baseUrl = 'https://api.themoviedb.org/3';
+  private baseUrl = MOVIE_DB_BASE_URL;
 
   constructor(private http: HttpClient) {}
 
   public getTvShows(name: string, page?: number): Observable<PagedResponse<TvShowModel>> {
-    const url = `${this.baseUrl}/search`;
+    const url = `${this.baseUrl}/search/tv`;
+    const params = { query: name, page };
+    const queryParams = getQueryParams(params);
 
-    return this.http.get(`${url}/tv?api_key=${this.apiKey}&query=${name}&page=${page}`).pipe(
+    return this.http.get(url, { params: queryParams }).pipe(
       map(response => response as PagedResponse<TvShowModel>)
     );
   }
 
   public getTvShowDetails(movieID: number): Observable<any> {
-    const url = `${this.baseUrl}/tv`;
+    const url = `${this.baseUrl}/tv/${movieID}`;
+    const params = { append_to_response: 'videos' };
+    const queryParams = getQueryParams(params);
 
-    return this.http.get(`${url}/${movieID}?api_key=${this.apiKey}&append_to_response=videos`);
+    return this.http.get(url, { params: queryParams });
   }
 
   public getTvShowCredits(movieID: number): Observable<any> {
     const url = `${this.baseUrl}/tv/${movieID}/credits`;
+    const queryParams = getQueryParams();
 
-    return this.http.get(`${url}?api_key=${this.apiKey}`);
+    return this.http.get(url, { params: queryParams });
   }
 
 }

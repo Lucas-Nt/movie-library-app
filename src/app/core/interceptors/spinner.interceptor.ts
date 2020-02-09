@@ -1,9 +1,12 @@
+import {
+    HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, HttpResponse
+} from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { HttpEvent, HttpInterceptor, HttpHandler, HttpRequest, HttpResponse } from '@angular/common/http';
+
 import { Observable } from 'rxjs';
-import { SpinnerService } from '../services/spinner.service';
 import { tap } from 'rxjs/operators';
 
+import { SpinnerService } from '../services/spinner.service';
 
 // TODO: revisit this implementation
 @Injectable({

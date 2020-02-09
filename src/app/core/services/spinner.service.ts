@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
+
 import { Subject } from 'rxjs';
+
 import { SpinnerState } from '../components/spinner/spinner';
 
 // TODO: revisit this implementation
