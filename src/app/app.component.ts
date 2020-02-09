@@ -6,7 +6,9 @@ import { NavigationEnd, Router } from '@angular/router';
 import { SearchService } from './components/search/search.service';
 import { ScrollActionsService } from './core/services/scroll-actions.service';
 import { areAllItemsNull } from './shared/generic-utilities';
-import _isEqual from 'lodash/isEqual';
+import { isEqual } from 'lodash';
+import { SpinnerService } from './core/services/spinner.service';
+import { SpinnerState } from './core/components/spinner/spinner';
 
 @Component({
   selector: 'app-root',
@@ -19,7 +21,8 @@ export class AppComponent implements OnInit, OnDestroy {
   public areSearchOptionsVisible: boolean;
   public isSearchBarSticky: boolean;
   public isScrollUpButtonVisible: boolean;
-  public shouldOpenSideBar: boolean;
+  public isSmallScreen: boolean;
+  public isLoading: boolean;
 
   private _subscriptions = new Subscription();
 
@@ -27,10 +30,16 @@ export class AppComponent implements OnInit, OnDestroy {
               private router: Router,
               private cdr: ChangeDetectorRef,
               private searchService: SearchService,
+              private spinnerService: SpinnerService,
               private scrollActionsService: ScrollActionsService) {}
 
   ngOnInit(): void {
-    this.evaluateSidebarVisibility();
+    this.isSmallScreen = window.innerWidth < 1300;
+
+    const spinnerSubscription = this.spinnerService.spinnerState
+      .subscribe((state: SpinnerState) => {
+        this.isLoading = state.show;
+      });
 
     const routingSubscription = this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
@@ -50,16 +59,17 @@ export class AppComponent implements OnInit, OnDestroy {
       this.scrollActionsService.isScrollUpButtonVisible
     ).pipe(
       filter(values => !areAllItemsNull(values)),
-      distinctUntilChanged(_isEqual)
+      distinctUntilChanged(isEqual)
     ).subscribe((statuses: boolean[]) => {
       this.isSearchBarSticky = statuses[0];
       this.isScrollUpButtonVisible = statuses[1];
       this.cdr.detectChanges();
     });
 
-    this._subscriptions.add(scrollFlagsSubscription);
+    this._subscriptions.add(spinnerSubscription);
     this._subscriptions.add(routingSubscription);
     this._subscriptions.add(scrollingSubscription);
+    this._subscriptions.add(scrollFlagsSubscription);
   }
 
   ngOnDestroy(): void {
@@ -68,11 +78,6 @@ export class AppComponent implements OnInit, OnDestroy {
 
   public toggleSearchMenuOptions(): void {
     this.areSearchOptionsVisible = !this.areSearchOptionsVisible;
-  }
-
-  private evaluateSidebarVisibility(): void {
-    const isSmallScreen = window.innerWidth < 1300;
-    this.shouldOpenSideBar = isSmallScreen ? false : true;
   }
 
 }

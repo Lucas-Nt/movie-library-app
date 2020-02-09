@@ -2,6 +2,7 @@
      [formGroup]="form">
 
   <div class="flex flex-1 p-relative">
+
     <!-- Search Input  -->
     <mat-form-field class="search-input p-relative"
                     appearance="outline">
@@ -39,20 +40,22 @@
     <!-- /Clear Input Button -->
   </div>
 
+  <!-- Search Type Radio Buttons -->
   <mat-radio-group class="flex ml-20"
                    formControlName="searchType"
                    aria-label="Select an option">
     <mat-radio-button color="primary"
                       value="Movie"
-                      [checked]="isMovieChecked">
+                      [checked]="isMovieTypeSelected">
       Movie
     </mat-radio-button>
     <mat-radio-button color="primary"
                       class="ml-15"
                       value="TV Show"
-                      [checked]="isTvShowChecked">
+                      [checked]="isTvShowTypeSelected">
       TV Show
     </mat-radio-button>
   </mat-radio-group>
+  <!-- /Search Type Radio Buttons -->
 
 </div>

@@ -1,6 +1,7 @@
-import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
 import { CdkScrollable } from '@angular/cdk/overlay';
+import { Injectable } from '@angular/core';
+
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -19,16 +20,10 @@ export class ScrollActionsService {
 
   public initiateScrollingFlagsCheck(data: CdkScrollable): void {
     const topOffset = data.getElementRef().nativeElement.scrollTop || 0;
-    const hasScrolledDown = topOffset > 100 ? true : false;
+    const hasScrolledDown = topOffset > 100;
 
-    if (hasScrolledDown) {
-      this.evaluateStickySearchBar(true);
-      this.isScrollUpButtonVisible.next(true);
-    } else {
-      this.isScrollUpButtonVisible.next(false);
-      this.evaluateStickySearchBar(false);
-    }
-
+    this.isScrollUpButtonVisible.next(hasScrolledDown);
+    this.evaluateStickySearchBar(hasScrolledDown);
   }
 
   private evaluateStickySearchBar(status: boolean) {

@@ -1,10 +1,11 @@
 <mat-drawer-container class="h-100-pc"
                       [class.sidebar-is-open]="sidebar.opened"
+                      [class.sidebar-disabled]="isLoading"
                       autosize>
 
   <!-- Sidebar -->
   <mat-drawer #sidebar
-              [opened]="shouldOpenSideBar"
+              [opened]="!isSmallScreen"
               class="sidebar mat-elevation-z7"
               mode="side">
 
@@ -74,7 +75,7 @@
 
   <!-- Main Content -->
   <app-main-content-wrapper [class.search-is-sticky]="isSearchBarSticky">
-    <app-spinner></app-spinner>
+    <app-spinner [isSpinnerVisible]="isLoading"></app-spinner>
     <router-outlet></router-outlet>
   </app-main-content-wrapper>
   <!-- /Main Content -->

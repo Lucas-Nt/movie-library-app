@@ -1,8 +1,10 @@
-import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { map } from 'rxjs/operators';
-import { MovieModel } from 'src/app/shared/models/movie-tv-show.model';
+import { Injectable } from '@angular/core';
+
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+
+import { TvShowModel } from 'src/app/shared/models/movie-tv-show.model';
 
 @Injectable()
 export class TvShowResource {
@@ -12,21 +14,21 @@ export class TvShowResource {
 
   constructor(private http: HttpClient) {}
 
-  getTvShows(name: string, page?: number): Observable<PagedResponse<MovieModel>> {
+  public getTvShows(name: string, page?: number): Observable<PagedResponse<TvShowModel>> {
     const url = `${this.baseUrl}/search`;
 
     return this.http.get(`${url}/tv?api_key=${this.apiKey}&query=${name}&page=${page}`).pipe(
-      map(response => response as PagedResponse<MovieModel>)
+      map(response => response as PagedResponse<TvShowModel>)
     );
   }
 
-  getTvShowDetails(movieID: number): Observable<any> {
+  public getTvShowDetails(movieID: number): Observable<any> {
     const url = `${this.baseUrl}/tv`;
 
     return this.http.get(`${url}/${movieID}?api_key=${this.apiKey}&append_to_response=videos`);
   }
 
-  getTvShowCredits(movieID: number): Observable<any> {
+  public getTvShowCredits(movieID: number): Observable<any> {
     const url = `${this.baseUrl}/tv/${movieID}/credits`;
 
     return this.http.get(`${url}?api_key=${this.apiKey}`);

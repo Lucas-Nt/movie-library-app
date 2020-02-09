@@ -1,14 +1,17 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { PageEvent } from '@angular/material';
-import { MovieResource } from '../search-movies.resource';
+
 import { Subscription } from 'rxjs';
+import { distinctUntilChanged } from 'rxjs/operators';
+
+import { ScrollActionsService } from 'src/app/core/services/scroll-actions.service';
 import { MovieTvShowMapper } from 'src/app/shared/mappers/movie-tv-show.mapper';
 import { MovieTvShowViewModel } from 'src/app/shared/models/movie-tv-show.model';
-import { FormGroup, FormBuilder } from '@angular/forms';
-import { SearchService } from '../search.service';
-import { distinctUntilChanged } from 'rxjs/operators';
-import { ScrollActionsService } from 'src/app/core/services/scroll-actions.service';
+import { SearchType } from '../search-movies-input/search-movies-input.component';
+import { MovieResource } from '../search-movies.resource';
 import { TvShowResource } from '../search-tv-shows.resource';
+import { SearchService } from '../search.service';
 
 enum Results {
   ShowResults = 'Show Results',
@@ -17,7 +20,7 @@ enum Results {
 
 export interface SearchParams {
   title: string;
-  searchType: string;
+  searchType: SearchType;
 }
 
 @Component({
@@ -36,7 +39,7 @@ export class SearchMoviesComponent implements OnInit, OnDestroy {
 
   public storedParameter: SearchParams;
   public currentIndex: number;
-  public pageLength: number;
+  public maxItemsPerPage = 20;
   public totalResults: number;
   public results$ = this.searchService.movieTvShowResults;
   public results: MovieTvShowViewModel[];
@@ -91,7 +94,7 @@ export class SearchMoviesComponent implements OnInit, OnDestroy {
   }
 
   private get _isSearchTypeMovie(): boolean {
-    return this.searchService.lastMovieSearchParams.searchType === 'Movie';
+    return this.searchService.lastMovieSearchParams.searchType === SearchType.MOVIE;
   }
 
   private pageToRequest(pageEventObject: PageEvent): number {
@@ -119,20 +122,15 @@ export class SearchMoviesComponent implements OnInit, OnDestroy {
         return;
       }
 
-      const currentPage = data.page;
-      const totalPages = data.total_pages;
+      const totalResults = data && data.total_results;
 
-      this.currentIndex = currentPage - 1;
+      this.currentIndex =  data.page - 1;
 
-      this.results = data && data.total_results > 0
+      this.results = totalResults > 0
                      ? data.results.map(item => this.transformToViewModel(item))
                      : [] ;
 
-      this.totalResults = data.total_results;
-
-      if (currentPage !== totalPages) {
-        this.pageLength = this.results && this.results.length;
-      }
+      this.totalResults = totalResults;
     });
 
     this._subscriptions.add(resultsSubscription);

@@ -6,8 +6,8 @@
   <!-- Search Input -->
   <div class="col-sm-6 col-md-5 col-md-6">
     <app-search-movies-input [form]="searchInputForm"
-                              (onSearchKeyUp)="executeSearch($event)"
-                              (onClearInput)="resetInput()">
+                             (onSearchKeyUp)="executeSearch($event)"
+                             (onClearInput)="resetInput()">
     </app-search-movies-input>
   </div>
   <!-- /Search Input -->
@@ -18,7 +18,7 @@
                    class="transparent-background"
                    [length]="totalResults"
                    [pageIndex]="currentIndex"
-                   [pageSize]="pageLength"
+                   [pageSize]="maxItemsPerPage"
                    [hidePageSize]="true"
                    [showFirstLastButtons]="true"
                    (page)="changePage($event)">

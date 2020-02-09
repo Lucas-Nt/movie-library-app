@@ -1,8 +1,15 @@
-import { Component, OnInit, EventEmitter, Output, OnDestroy, Input } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { debounceTime } from 'rxjs/operators';
+
 import { Subscription } from 'rxjs';
+import { debounceTime } from 'rxjs/operators';
+
 import { SearchService } from '../search.service';
+
+export enum SearchType {
+  MOVIE = 'Movie',
+  TV_SHOW = 'TV Show'
+}
 
 @Component({
   selector: 'app-search-movies-input',
@@ -17,34 +24,17 @@ export class SearchMoviesInputComponent implements OnInit, OnDestroy {
 
   public searchFormSubscription: Subscription;
   public inputHasValue: boolean;
-  public isMovieChecked = true;
-  public isTvShowChecked = false;
+  public isMovieTypeSelected = true;
+  public isTvShowTypeSelected = false;
 
   constructor(private searchService: SearchService) { }
 
-  ngOnInit(): void {
-    this.form.patchValue({ searchType: 'Movie' });
+  public ngOnInit(): void {
+    this.prepareSearchForm();
     this.watchFormValueChanges();
-
-    const hasTitle = this.searchService.lastMovieSearchParams &&
-                     this.searchService.lastMovieSearchParams.title;
-
-    if (hasTitle) {
-      this.form.patchValue(
-        {
-          title: this.searchService.lastMovieSearchParams.title,
-          searchType: this.searchService.lastMovieSearchParams.searchType
-         },
-        { emitEvent: false }
-      );
-
-      this.isMovieChecked = this.searchService.lastMovieSearchParams.searchType === 'Movie';
-      this.isTvShowChecked = !this.isMovieChecked;
-      this.inputHasValue = true;
-    }
   }
 
-  ngOnDestroy(): void {
+  public ngOnDestroy(): void {
     this.searchFormSubscription.unsubscribe();
   }
 
@@ -60,6 +50,28 @@ export class SearchMoviesInputComponent implements OnInit, OnDestroy {
       this.inputHasValue = Boolean(userInput);
       this.onSearchKeyUp.emit({ title: userInput, searchType: value.searchType });
     });
+  }
+
+  private prepareSearchForm(): void {
+    const hasTitle = this.searchService.lastMovieSearchParams &&
+                     this.searchService.lastMovieSearchParams.title;
+
+    if (hasTitle) {
+      this.updateSearchForm(
+        this.searchService.lastMovieSearchParams.title,
+        this.searchService.lastMovieSearchParams.searchType
+      );
+
+      this.isMovieTypeSelected = this.searchService.lastMovieSearchParams.searchType === SearchType.MOVIE;
+      this.isTvShowTypeSelected = !this.isMovieTypeSelected;
+      this.inputHasValue = true;
+    } else {
+      this.updateSearchForm(null, SearchType.MOVIE);
+    }
+  }
+
+  private updateSearchForm(titleValue: string, searchTypeValue: SearchType): void {
+    this.form.patchValue({ title: titleValue, searchType: searchTypeValue });
   }
 
 }
