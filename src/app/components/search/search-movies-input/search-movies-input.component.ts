@@ -20,8 +20,7 @@ export class SearchMoviesInputComponent implements OnInit, OnDestroy {
 
   public searchFormSubscription: Subscription;
   public inputHasValue: boolean;
-  public isMovieTypeSelected = true;
-  public isTvShowTypeSelected = false;
+  public searchType = SearchType;
 
   constructor(private searchService: SearchService) { }
 
@@ -58,8 +57,6 @@ export class SearchMoviesInputComponent implements OnInit, OnDestroy {
         this.searchService.lastMovieSearchParams.searchType
       );
 
-      this.isMovieTypeSelected = this.searchService.lastMovieSearchParams.searchType === SearchType.MOVIE;
-      this.isTvShowTypeSelected = !this.isMovieTypeSelected;
       this.inputHasValue = true;
     } else {
       this.updateSearchForm(null, SearchType.MOVIE);

@@ -45,15 +45,13 @@
                    formControlName="searchType"
                    aria-label="Select an option">
     <mat-radio-button color="primary"
-                      value="Movie"
-                      [checked]="isMovieTypeSelected">
-      Movie
+                      value="{{searchType.MOVIE}}">
+      {{ searchType.MOVIE }}
     </mat-radio-button>
     <mat-radio-button color="primary"
                       class="ml-15"
-                      value="TV Show"
-                      [checked]="isTvShowTypeSelected">
-      TV Show
+                      value="{{searchType.TV_SHOW}}">
+      {{ searchType.TV_SHOW }}
     </mat-radio-button>
   </mat-radio-group>
   <!-- /Search Type Radio Buttons -->

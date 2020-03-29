@@ -1,6 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { SafeResourceUrl } from '@angular/platform-browser/src/security/dom_sanitization_service';
+
 import { SafePipe } from '../../pipes/safe.pipe';
 
 @Component({
@@ -18,7 +19,7 @@ export class DialogBaseComponent implements OnInit {
               private dialogRef: MatDialogRef<DialogBaseComponent>,
               @Inject(MAT_DIALOG_DATA) private data: any) { }
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
     if (this.data && this.data.youtubeKey) {
       this.createTrailerUrl(this.data.youtubeKey);
     }
