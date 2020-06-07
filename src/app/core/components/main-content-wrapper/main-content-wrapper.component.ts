@@ -9,7 +9,7 @@ import { Subscription } from 'rxjs';
 })
 export class MainContentWrapperComponent implements OnInit, OnDestroy {
 
-  @Input() cssClass: string;
+  @Input() cssClass: string; // TODO: is this really needed?
 
   public get backgroundImage(): string {
     return this._backgroundImage;

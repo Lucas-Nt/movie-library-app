@@ -9,6 +9,7 @@ import {
 
 export class MovieTvShowMapper {
 
+  // TODO: rename methods with VM
   public toMovieViewModel(movie: MovieModel): MovieTvShowViewModel {
     if (!movie) {
       return {

@@ -48,6 +48,8 @@ export class MovieDetailsComponent implements OnInit, OnDestroy {
   }
 
   public openTrailerDialog(stringParam: string): void {
+
+    // TODO: ADD trailer url here
     this.dialog.open(DialogBaseComponent, {
       data: { dialogType: 'video', youtubeKey: stringParam },
       width: '60%',
