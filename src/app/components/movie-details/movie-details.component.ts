@@ -31,8 +31,8 @@ export class MovieDetailsComponent implements OnInit, OnDestroy {
     this.route.data.pipe(first()).subscribe(data => {
       this.isMovie = data.searchType === SearchType.MOVIE;
 
-      this.data = this.isMovie ? this.movieTvShowMapper.toMovieDetailViewModel(data.movieDetails[0])
-                               : this.movieTvShowMapper.toTvShowDetailViewModel(data.movieDetails[0]);
+      this.data = this.isMovie ? this.movieTvShowMapper.toMovieDetailVM(data.movieDetails[0])
+                               : this.movieTvShowMapper.toTvShowDetailVM(data.movieDetails[0]);
 
       this.data.credits = data.movieDetails[1];
       this.backgroundImageService.setBackground(this.data.backdropPath);

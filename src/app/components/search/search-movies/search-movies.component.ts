@@ -155,8 +155,8 @@ export class SearchMoviesComponent implements OnInit, OnDestroy {
   }
 
   private transformToViewModel(item): any {
-    return this._isSearchTypeMovie ? this.movieTvShowMapper.toMovieViewModel(item)
-                                   : this.movieTvShowMapper.toTvShowViewModel(item);
+    return this._isSearchTypeMovie ? this.movieTvShowMapper.toMovieVM(item)
+                                   : this.movieTvShowMapper.toTvShowVM(item);
   }
 
 }

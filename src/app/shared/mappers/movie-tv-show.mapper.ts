@@ -9,8 +9,7 @@ import {
 
 export class MovieTvShowMapper {
 
-  // TODO: rename methods with VM
-  public toMovieViewModel(movie: MovieModel): MovieTvShowViewModel {
+  public toMovieVM(movie: MovieModel): MovieTvShowViewModel {
     if (!movie) {
       return {
         id : null,
@@ -32,7 +31,7 @@ export class MovieTvShowMapper {
     };
   }
 
-  public toMovieDetailViewModel(movie: MovieDetailModel): MovieTvShowDetailViewModel {
+  public toMovieDetailVM(movie: MovieDetailModel): MovieTvShowDetailViewModel {
     if (!movie) {
       return {
         id : null,
@@ -62,7 +61,7 @@ export class MovieTvShowMapper {
       };
   }
 
-  public toTvShowViewModel(tvShow: TvShowModel): MovieTvShowViewModel {
+  public toTvShowVM(tvShow: TvShowModel): MovieTvShowViewModel {
     if (!tvShow) {
       return {
         id : null,
@@ -84,7 +83,7 @@ export class MovieTvShowMapper {
     };
   }
 
-  public toTvShowDetailViewModel(tvShow: TvShowDetailModel): MovieTvShowDetailViewModel {
+  public toTvShowDetailVM(tvShow: TvShowDetailModel): MovieTvShowDetailViewModel {
     if (!tvShow) {
       return {
         id : null,
