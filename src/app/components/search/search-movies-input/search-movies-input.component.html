@@ -7,7 +7,7 @@
     <mat-form-field class="search-input p-relative"
                     appearance="outline">
       <mat-label class="text-white">
-        <span *ngIf="form.get('searchType').value === 'Movie'; else typeTvShowTitle">
+        <span *ngIf="form.get('searchType').value === searchTypeEnum.MOVIE; else typeTvShowTitle">
           Type a movie title
         </span>
         <ng-template #typeTvShowTitle>
@@ -45,13 +45,13 @@
                    formControlName="searchType"
                    aria-label="Select an option">
     <mat-radio-button color="primary"
-                      value="{{searchType.MOVIE}}">
-      {{ searchType.MOVIE }}
+                      value="{{searchTypeEnum.MOVIE}}">
+      {{ searchTypeEnum.MOVIE }}
     </mat-radio-button>
     <mat-radio-button color="primary"
                       class="ml-15"
-                      value="{{searchType.TV_SHOW}}">
-      {{ searchType.TV_SHOW }}
+                      value="{{searchTypeEnum.TV_SHOW}}">
+      {{ searchTypeEnum.TV_SHOW }}
     </mat-radio-button>
   </mat-radio-group>
   <!-- /Search Type Radio Buttons -->

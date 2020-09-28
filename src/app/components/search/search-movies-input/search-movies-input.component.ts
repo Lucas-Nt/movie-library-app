@@ -20,7 +20,7 @@ export class SearchMoviesInputComponent implements OnInit, OnDestroy {
 
   public searchFormSubscription: Subscription;
   public inputHasValue: boolean;
-  public searchType = SearchType;
+  public searchTypeEnum = SearchType;
 
   constructor(private searchService: SearchService) { }
 
@@ -59,7 +59,7 @@ export class SearchMoviesInputComponent implements OnInit, OnDestroy {
 
       this.inputHasValue = true;
     } else {
-      this.updateSearchForm(null, SearchType.MOVIE);
+      this.updateSearchForm(null, this.searchTypeEnum.MOVIE);
     }
   }
 

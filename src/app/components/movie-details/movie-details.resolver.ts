@@ -8,19 +8,23 @@ import { Observable, forkJoin, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { HttpErrorResponse } from '@angular/common/http';
 
+import { SearchType } from 'src/app/shared/enums/search-type.enum';
+
 @Injectable({ providedIn: 'root' })
 export class MovieDetailsResolver implements Resolve<any> {
+
+  private searchTypeEnum = SearchType;
 
   constructor(private movieResource: MovieResource,
               private tvShowResource: TvShowResource) {}
 
   resolve(route: ActivatedRouteSnapshot): Observable<any> {
-
     const id = route.params.id;
     const searchTypeParam = route.data['searchType'];
 
-    return searchTypeParam === 'Movie' ? this.resolveMovieDetails(id)
-                                       : this.resolveTvShowDetails(id);
+    return searchTypeParam === this.searchTypeEnum.MOVIE
+      ? this.resolveMovieDetails(id)
+      : this.resolveTvShowDetails(id);
   }
 
   private resolveMovieDetails(id: number): Observable<any> {

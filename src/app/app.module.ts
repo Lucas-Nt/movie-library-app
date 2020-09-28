@@ -10,20 +10,20 @@ import { APP_ROUTES } from './app.routes';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { SearchMoviesModule } from './components/search/search-movies.module';
+import { MovieDetailsModule } from './components/movie-details/movie-details.module';
 import { SpinnerInterceptorService } from './core/interceptors/spinner.interceptor';
-import { MovieDetailsComponent } from './components/movie-details/movie-details.component';
 
 
 @NgModule({
   declarations: [
-    AppComponent,
-    MovieDetailsComponent
+    AppComponent
   ],
   imports: [
     BrowserModule,
     ReactiveFormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
+    MovieDetailsModule,
     SearchMoviesModule,
     RouterModule.forRoot(APP_ROUTES),
     SharedModule,

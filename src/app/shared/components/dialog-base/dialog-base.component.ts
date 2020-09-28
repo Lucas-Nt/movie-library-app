@@ -1,36 +1,25 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
-import { SafeResourceUrl } from '@angular/platform-browser';
-
-import { SafePipe } from '../../pipes/safe.pipe';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-dialog-base',
   templateUrl: './dialog-base.component.html',
-  styleUrls: ['./dialog-base.component.scss'],
-  providers: [ SafePipe ]
+  styleUrls: ['./dialog-base.component.scss']
 })
 export class DialogBaseComponent implements OnInit {
 
-  public trailerUrl: SafeResourceUrl;
-  private youtubeMainURL = 'https://www.youtube.com/embed/';
+  public dialogData: any; // TODO: fix type;
 
-  constructor(private safe: SafePipe,
-              private dialogRef: MatDialogRef<DialogBaseComponent>,
-              @Inject(MAT_DIALOG_DATA) private data: any) { }
+  constructor(private dialogRef: MatDialogRef<DialogBaseComponent>,
+              @Inject(MAT_DIALOG_DATA)
+              private data: any) { }
 
   public ngOnInit(): void {
-    if (this.data && this.data.youtubeKey) {
-      this.createTrailerUrl(this.data.youtubeKey);
-    }
+    this.dialogData = this.data;
   }
 
   public closeDialog(): void {
     this.dialogRef.close();
-  }
-
-  private createTrailerUrl(key: string): void {
-    this.trailerUrl = this.safe.transform(this.youtubeMainURL + key + '?autoplay=1');
   }
 
 }

@@ -2,13 +2,15 @@
 
 .purple-hr {
   background: linear-gradient(to right, #3e0d41, rgba(255, 255, 0, 0));
-  height: 5px;
+  height: 2px;
   border: 0
 }
 
 .movie-cards-wrapper {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  grid-gap: 20px;
+  justify-content: space-between;
 
   .movie-header {
     min-height: 70px;

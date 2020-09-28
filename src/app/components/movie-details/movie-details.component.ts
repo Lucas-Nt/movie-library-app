@@ -1,3 +1,4 @@
+import { MovieDetailsService } from './movie-details.service';
 import { Location } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material';
@@ -6,9 +7,11 @@ import { ActivatedRoute } from '@angular/router';
 import { first } from 'rxjs/operators';
 
 import { BackgroundImageService } from 'src/app/core/services/background-image.service';
-import { DialogBaseComponent } from 'src/app/shared/components/dialog-base/dialog-base.component';
 import { SearchType } from 'src/app/shared/enums/search-type.enum';
 import { MovieTvShowMapper } from 'src/app/shared/mappers/movie-tv-show.mapper';
+import { POSTER_BASE_URL, YOUTUBE_BASE_URL } from 'src/app/shared/utilities/resource-utilities';
+import { DialogBaseComponent } from 'src/app/shared/components/dialog-base/dialog-base.component';
+import { TrailerModalComponent } from 'src/app/components/movie-details/trailer-modal/trailer-modal.component';
 
 @Component({
   selector: 'app-movie-details',
@@ -19,24 +22,17 @@ export class MovieDetailsComponent implements OnInit, OnDestroy {
 
   public data: any;
   public isMovie: boolean;
-  public posterEndpoint = 'https://image.tmdb.org/t/p/w300/';
+  public posterEndpoint = POSTER_BASE_URL;
 
   constructor(private route: ActivatedRoute,
               private dialog: MatDialog,
               private location: Location,
               private movieTvShowMapper: MovieTvShowMapper,
+              private movieDetailsService: MovieDetailsService,
               private backgroundImageService: BackgroundImageService) { }
 
   public ngOnInit() {
-    this.route.data.pipe(first()).subscribe(data => {
-      this.isMovie = data.searchType === SearchType.MOVIE;
-
-      this.data = this.isMovie ? this.movieTvShowMapper.toMovieDetailVM(data.movieDetails[0])
-                               : this.movieTvShowMapper.toTvShowDetailVM(data.movieDetails[0]);
-
-      this.data.credits = data.movieDetails[1];
-      this.backgroundImageService.setBackground(this.data.backdropPath);
-    });
+    this.subscribeToRouteData();
   }
 
   public ngOnDestroy(): void {
@@ -47,13 +43,26 @@ export class MovieDetailsComponent implements OnInit, OnDestroy {
     this.location.back();
   }
 
-  public openTrailerDialog(stringParam: string): void {
-
-    // TODO: ADD trailer url here
+  public openTrailerDialog(): void {
     this.dialog.open(DialogBaseComponent, {
-      data: { dialogType: 'video', youtubeKey: stringParam },
+      data: {
+        component: TrailerModalComponent
+      },
       width: '60%',
       height: '60%'
+    });
+  }
+
+  private subscribeToRouteData() {
+    this.route.data.pipe(first()).subscribe(data => {
+      this.isMovie = data.searchType === SearchType.MOVIE;
+
+      this.data = this.isMovie ? this.movieTvShowMapper.toMovieDetailVM(data.movieDetails[0])
+                               : this.movieTvShowMapper.toTvShowDetailVM(data.movieDetails[0]);
+
+      this.data.credits = data.movieDetails[1];
+      this.movieDetailsService.youTubeTrailerKey =  this.data.youTubeVideoKey;
+      this.backgroundImageService.setBackground(this.data.backdropPath);
     });
   }
 
