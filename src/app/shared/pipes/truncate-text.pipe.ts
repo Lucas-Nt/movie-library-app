@@ -10,9 +10,9 @@ export class TruncateTextPipe implements PipeTransform {
       return;
     }
 
-    const isHeigherThanLimit = value.length > characterLimit;
+    const isHigherThanLimit = value.length > characterLimit;
 
-    return isHeigherThanLimit
+    return isHigherThanLimit
            ? value.substring(0, characterLimit) + '...'
            : value;
   }
