@@ -1,11 +1,11 @@
+import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { MenuComponent } from './components/menu/menu.component';
 import { RouterModule } from '@angular/router';
 import { SharedModule } from '../shared/shared.module';
-import { SpinnerComponent } from './components/spinner/spinner.component';
-import { CommonModule } from '@angular/common';
-import { ScrollUpButtonComponent } from './components/scroll-up-button/scroll-up-button.component';
 import { MainContentWrapperComponent } from './components/main-content-wrapper/main-content-wrapper.component';
+import { MenuComponent } from './components/menu/menu.component';
+import { ScrollUpButtonComponent } from './components/scroll-up-button/scroll-up-button.component';
+import { SpinnerComponent } from './components/spinner/spinner.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +16,7 @@ import { MainContentWrapperComponent } from './components/main-content-wrapper/m
   ],
   imports: [
     RouterModule,
-    SharedModule,
+    SharedModule, // Remove shared from core
     CommonModule
   ],
   exports: [

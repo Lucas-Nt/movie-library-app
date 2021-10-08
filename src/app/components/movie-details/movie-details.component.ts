@@ -1,17 +1,15 @@
-import { MovieDetailsService } from './movie-details.service';
 import { Location } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
-
 import { first } from 'rxjs/operators';
-
 import { BackgroundImageService } from 'src/app/core/services/background-image.service';
 import { SearchType } from 'src/app/shared/enums/search-type.enum';
 import { MovieTvShowMapper } from 'src/app/shared/mappers/movie-tv-show.mapper';
-import { POSTER_BASE_URL, YOUTUBE_BASE_URL } from 'src/app/shared/utilities/resource-utilities';
-import { DialogBaseComponent } from 'src/app/shared/components/dialog-base/dialog-base.component';
-import { TrailerModalComponent } from 'src/app/components/movie-details/trailer-modal/trailer-modal.component';
+import { POSTER_BASE_URL } from 'src/app/shared/utilities/resource-utilities';
+import { MovieDetailsService } from './movie-details.service';
+
+
 
 @Component({
   selector: 'app-movie-details',
@@ -43,14 +41,16 @@ export class MovieDetailsComponent implements OnInit, OnDestroy {
     this.location.back();
   }
 
-  public openTrailerDialog(): void {
-    this.dialog.open(DialogBaseComponent, {
-      data: {
-        component: TrailerModalComponent
-      },
-      width: '60%',
-      height: '60%'
-    });
+  public openTrailerDialog(key: string): void {
+    console.log(key);
+    alert('should open dialog! implementation pending!');
+    // this.dialog.open(DialogBaseComponent, {
+    //   data: {
+    //     component: TrailerModalComponent
+    //   },
+    //   width: '60%',
+    //   height: '60%'
+    // });
   }
 
   private subscribeToRouteData() {

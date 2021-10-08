@@ -1,10 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { PageEvent } from '@angular/material';
-
+import { PageEvent } from '@angular/material/paginator';
 import { Subscription } from 'rxjs';
 import { distinctUntilChanged } from 'rxjs/operators';
-
 import { ScrollActionsService } from 'src/app/core/services/scroll-actions.service';
 import { SearchType } from 'src/app/shared/enums/search-type.enum';
 import { MovieTvShowMapper } from 'src/app/shared/mappers/movie-tv-show.mapper';
@@ -12,6 +10,8 @@ import { MovieTvShowViewModel } from 'src/app/shared/models/movie-tv-show.model'
 import { MovieResource } from '../search-movies.resource';
 import { TvShowResource } from '../search-tv-shows.resource';
 import { SearchService } from '../search.service';
+
+
 
 enum Results {
   ShowResults = 'Show Results',
