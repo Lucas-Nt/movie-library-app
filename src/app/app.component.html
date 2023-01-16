@@ -1,13 +1,14 @@
-<mat-drawer-container class="h-100-pc"
-                      [class.sidebar-is-open]="sidebar.opened"
-                      [class.sidebar-disabled]="isLoading"
-                      autosize>
+<mat-drawer-container class="h-100-pc sidebar-is-open"
+[class.sidebar-is-open]="isSidebarOpened"
+[class.sidebar-disabled]="isLoading"
+autosize>
 
   <!-- Sidebar -->
   <mat-drawer #sidebar
-              [opened]="!isSmallScreen"
+              [opened]="true"
               class="sidebar mat-elevation-z7"
-              mode="side">
+              mode="side"
+              (openedChange)="isSidebarOpened = $event">
 
     <div class="logo-wrapper flex align-items-center text-white pt-15 pr-15 pl-15 pb-7">
       <img class="logo mr-10"

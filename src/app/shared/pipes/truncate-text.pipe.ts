@@ -1,20 +1,16 @@
-import { Pipe, PipeTransform } from '@angular/core';
+import { Pipe, PipeTransform } from '@angular/core'
 
 @Pipe({
-  name: 'truncateText'
+  name: 'truncateText',
 })
 export class TruncateTextPipe implements PipeTransform {
-
   transform(value: string, characterLimit: number): any {
     if (!value) {
-      return;
+      return
     }
 
-    const isHigherThanLimit = value.length > characterLimit;
+    const isHigherThanLimit = value.length > characterLimit
 
-    return isHigherThanLimit
-           ? value.substring(0, characterLimit) + '...'
-           : value;
+    return isHigherThanLimit ? value.substring(0, characterLimit) + '...' : value
   }
-
 }

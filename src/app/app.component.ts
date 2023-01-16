@@ -1,16 +1,16 @@
 import { CdkScrollable, ScrollDispatcher } from '@angular/cdk/overlay';
 import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
-
 import { isEqual } from 'lodash';
 import { Subscription, zip } from 'rxjs';
 import { debounceTime, distinctUntilChanged, filter } from 'rxjs/operators';
-
 import { SearchService } from './components/search/search.service';
 import { SpinnerState } from './core/components/spinner/spinner';
 import { ScrollActionsService } from './core/services/scroll-actions.service';
 import { SpinnerService } from './core/services/spinner.service';
 import { areAllItemsNull } from './shared/utilities/generic-utilities';
+
+
 
 @Component({
   selector: 'app-root',
@@ -21,6 +21,7 @@ import { areAllItemsNull } from './shared/utilities/generic-utilities';
 export class AppComponent implements OnInit, OnDestroy {
 
   public areSearchOptionsVisible: boolean;
+  public isSidebarOpened: boolean;
   public isSearchBarSticky: boolean;
   public isScrollUpButtonVisible: boolean;
   public isSmallScreen: boolean;
@@ -36,7 +37,7 @@ export class AppComponent implements OnInit, OnDestroy {
               private scrollActionsService: ScrollActionsService) {}
 
   public ngOnInit(): void {
-    this.isSmallScreen = window.innerWidth < 1300;
+    // this.isSmallScreen = window.innerWidth < 1300;
 
     const spinnerSubscription = this.spinnerService.spinnerState
       .subscribe((state: SpinnerState) => {
@@ -80,6 +81,10 @@ export class AppComponent implements OnInit, OnDestroy {
 
   public toggleSearchMenuOptions(): void {
     this.areSearchOptionsVisible = !this.areSearchOptionsVisible;
+  }
+
+  log(x) {
+    console.log(x);
   }
 
 }

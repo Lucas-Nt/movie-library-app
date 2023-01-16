@@ -56,7 +56,6 @@ export class MovieDetailsComponent implements OnInit, OnDestroy {
   private subscribeToRouteData() {
     this.route.data.pipe(first()).subscribe(data => {
       this.isMovie = data.searchType === SearchType.MOVIE;
-
       this.data = this.isMovie ? this.movieTvShowMapper.toMovieDetailVM(data.movieDetails[0])
                                : this.movieTvShowMapper.toTvShowDetailVM(data.movieDetails[0]);
 

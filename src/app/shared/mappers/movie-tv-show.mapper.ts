@@ -1,10 +1,5 @@
 import {
-  MovieModel,
-  MovieTvShowViewModel,
-  TvShowModel,
-  MovieDetailModel,
-  TvShowDetailModel,
-  MovieTvShowDetailViewModel
+  MovieDetailModel, MovieModel, MovieTvShowDetailViewModel, MovieTvShowViewModel, TvShowDetailModel, TvShowModel
 } from '../models/movie-tv-show.model';
 
 export class MovieTvShowMapper {
@@ -53,7 +48,7 @@ export class MovieTvShowMapper {
         releaseDate: movie.release_date,
         description: movie.overview,
         genres: movie.genres,
-        rating: movie.vote_average,
+        rating: +movie.vote_average.toFixed(1),
         runtime: movie.runtime,
         posterPath: movie.poster_path,
         backdropPath: movie.backdrop_path,
@@ -106,7 +101,7 @@ export class MovieTvShowMapper {
         description: tvShow.overview,
         genres: tvShow.genres,
         runtime: null,
-        rating: tvShow.vote_average,
+        rating: +tvShow.vote_average.toFixed(1),
         posterPath: tvShow.poster_path,
         backdropPath: tvShow.backdrop_path,
         youTubeVideoKey: tvShow.videos && tvShow.videos.results.length && tvShow.videos.results[0].key
