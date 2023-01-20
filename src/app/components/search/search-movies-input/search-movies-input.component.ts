@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { UntypedFormGroup } from '@angular/forms';
 
 import { Subscription } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
@@ -14,7 +14,7 @@ import { SearchService } from '../search.service';
 })
 export class SearchMoviesInputComponent implements OnInit, OnDestroy {
 
-  @Input() form: FormGroup;
+  @Input() form: UntypedFormGroup;
   @Output() onSearchKeyUp = new EventEmitter();
   @Output() onClearInput = new EventEmitter();
 
