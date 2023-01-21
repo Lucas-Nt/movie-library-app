@@ -9,6 +9,7 @@ import { SearchMoviesRoutingModule } from './search-movies-routing.module'
 @NgModule({
   declarations: [...search.COMPONENTS],
   imports: [CommonModule, ReactiveFormsModule, SharedModule, SearchMoviesRoutingModule],
+  exports: [SearchMoviesRoutingModule],
   providers: [...search.RESOURCES, ...search.SERVICES],
 })
 export class SearchMoviesModule {}
