@@ -27,9 +27,9 @@ export class SearchMoviesResultsComponent {
 
   goToDetails(id: number): void {
     if (this.searchType === this.searchTypeEnum.MOVIE) {
-      this.router.navigate([`movie/${id}`])
+      this.router.navigate([`details/movie/${id}`])
     } else {
-      this.router.navigate([`tv-show/${id}`])
+      this.router.navigate([`details/tv-show/${id}`])
     }
   }
 }

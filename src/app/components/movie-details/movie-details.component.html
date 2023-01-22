@@ -1,29 +1,17 @@
 <div class="movie-detail-wrapper flex">
-
   <div class="movie-details-top col-md-10">
-    <div class="movie-header flex align-items-center justify-space-between">
-
-      <div class="flex">
+    <div class="movie-header flex align-items-center">
+      <!-- Go Back Icon -->
+      <mat-icon (click)="goToPreviousPage()" color="primary" class="arrow-back"> keyboard_arrow_left </mat-icon>
+      <!-- /Go Back Icon -->
+      <div class="flex flex-column">
         <!-- Movie Title -->
-        <h1 class="inline-block fs-35">
-          <!-- /Movie Title -->
-
-          <!-- Go Back Icon -->
-          <mat-icon (click)="goToPreviousPage()"
-                    color="primary"
-                    class="arrow-back">
-            keyboard_arrow_left
-          </mat-icon>
-          <!-- /Go Back Icon -->
-
-          {{ data.title }} {{ data.releaseDate | yearOnly }}
-        </h1>
+        <h1 class="inline-block fs-35">{{ data.title }} {{ data.releaseDate | yearOnly }}</h1>
+        <!-- /Movie Title -->
 
         <!-- Genre Tags -->
         <mat-chip-list class="genre-tags">
-          <mat-chip *ngFor="let genre of data?.genres"
-                    color="primary"
-                    selected>
+          <mat-chip *ngFor="let genre of data?.genres" color="primary" selected>
             {{ genre.name }}
           </mat-chip>
         </mat-chip-list>
@@ -31,36 +19,31 @@
       </div>
 
       <!-- Movie Rating -->
-      <app-rating-circle [rating]="data.rating"
-                         [customClass]="'w-90 fs-24 mr-20'">
-      </app-rating-circle>
+      <app-rating-circle [rating]="data.rating" [customClass]="'w-90 fs-24 mr-20'"> </app-rating-circle>
       <!-- /Movie Rating -->
-
     </div>
 
     <div class="main-movie-info flex pl-40 pr-40">
-
       <!-- Movie Poster -->
-      <img class="mat-elevation-z11"
-           [src]="posterEndpoint+data?.posterPath">
+      <img class="mat-elevation-z11" [src]="posterEndpoint + data?.posterPath" />
       <!-- /Movie Poster -->
 
       <!-- Other Movie Info -->
       <div class="flex flex-column justify-space-between pl-25 fs-18">
-
         <!-- Description -->
         <p class="description text-light-white">
-          {{ data.description | truncateText:295 }}
+          {{ data.description | truncateText : 295 }}
         </p>
         <!-- /Description -->
 
         <div>
-
-          <button class="mb-15"
-                  mat-raised-button
-                  color="primary"
-                  [disabled]="!data.youTubeVideoKey"
-                  (click)="openTrailerDialog(data.youTubeVideoKey)">
+          <button
+            class="mb-15"
+            mat-raised-button
+            color="primary"
+            [disabled]="!data.youTubeVideoKey"
+            (click)="openTrailerDialog(data.youTubeVideoKey)"
+          >
             <mat-icon>videocam</mat-icon>
             {{ data.youTubeVideoKey ? 'See trailer' : 'No Trailer Available' }}
           </button>
@@ -68,7 +51,7 @@
           <!-- Runtime Info -->
           <div class="pb-15">
             <strong class="pr-10">Runtime:</strong>
-            <span class="text-light-white">{{data.runtime | runtime}}</span>
+            <span class="text-light-white">{{ data.runtime | runtime }}</span>
           </div>
           <!-- /Runtime Info -->
 
@@ -76,10 +59,7 @@
           <div class="pb-15">
             <strong class="pr-10">Movie website:</strong>
 
-            <a *ngIf="data?.homepage; else empty"
-               class="text-primary"
-               [href]="data?.homepage"
-               target="_blank">
+            <a *ngIf="data?.homepage; else empty" class="text-primary" [href]="data?.homepage" target="_blank">
               {{ data.homepage }}
             </a>
 
@@ -88,19 +68,13 @@
             </ng-template>
           </div>
           <!-- /Movie Website -->
-
         </div>
-
       </div>
       <!-- /Other Movie Info -->
-
     </div>
-
 
     <!-- <pre>
       {{movie | json}}
     </pre> -->
-
   </div>
-
 </div>

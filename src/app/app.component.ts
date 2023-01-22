@@ -1,7 +1,6 @@
 import { CdkScrollable, ScrollDispatcher } from '@angular/cdk/overlay'
 import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core'
 import { NavigationEnd, Router } from '@angular/router'
-import { isEqual } from 'lodash'
 import { Subscription, zip } from 'rxjs'
 import { debounceTime, distinctUntilChanged, filter } from 'rxjs/operators'
 import { SearchService } from './components/search/search.service'
@@ -27,45 +26,33 @@ export class AppComponent implements OnInit, OnDestroy {
 
   constructor(
     private scrollDispatcher: ScrollDispatcher,
-    private router: Router,
+
     private cdr: ChangeDetectorRef,
-    private searchService: SearchService,
     private spinnerService: SpinnerService,
     private scrollActionsService: ScrollActionsService
   ) {}
 
   public ngOnInit(): void {
-    // this.isSmallScreen = window.innerWidth < 1300;
-
+    this.isSmallScreen = window.innerWidth < 1300
     const spinnerSubscription = this.spinnerService.spinnerState.subscribe((state: SpinnerState) => {
       this.isLoading = state.show
-    })
-
-    const routingSubscription = this.router.events.subscribe((event) => {
-      if (event instanceof NavigationEnd) {
-        this.scrollActionsService.scrollToTop()
-        this.searchService.evaluateDataClearing(event.url)
-      }
     })
 
     const scrollingSubscription = this.scrollDispatcher
       .scrolled()
       .pipe(debounceTime(200))
       .subscribe((data: CdkScrollable) => this.scrollActionsService.initiateScrollingFlagsCheck(data))
-
     const scrollFlagsSubscription = zip(this.scrollActionsService.isSearchBarSticky, this.scrollActionsService.isScrollUpButtonVisible)
       .pipe(
         filter((values) => !areAllItemsNull(values)),
-        distinctUntilChanged(isEqual)
+        distinctUntilChanged() // FIX this
       )
       .subscribe((statuses: boolean[]) => {
         this.isSearchBarSticky = statuses[0]
         this.isScrollUpButtonVisible = statuses[1]
         this.cdr.detectChanges()
       })
-
     this._subscriptions.add(spinnerSubscription)
-    this._subscriptions.add(routingSubscription)
     this._subscriptions.add(scrollingSubscription)
     this._subscriptions.add(scrollFlagsSubscription)
   }

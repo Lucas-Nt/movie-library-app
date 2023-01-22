@@ -1,13 +1,14 @@
 import { Component, OnDestroy, OnInit } from '@angular/core'
 import { UntypedFormBuilder, UntypedFormGroup } from '@angular/forms'
 import { PageEvent } from '@angular/material/paginator'
+import { NavigationEnd, Router } from '@angular/router'
 import { Subscription } from 'rxjs'
 import { distinctUntilChanged } from 'rxjs/operators'
 import { ScrollActionsService } from 'src/app/core/services/scroll-actions.service'
 import { SearchType } from 'src/app/shared/enums/search-type.enum'
 import { MovieTvShowMapper } from 'src/app/shared/mappers/movie-tv-show.mapper'
 import { MovieTvShowViewModel } from 'src/app/shared/models/movie-tv-show.model'
-import { MovieResource } from '../search-movies.resource'
+import { MovieResource } from '../../../shared/resources/search-movies.resource'
 import { TvShowResource } from '../search-tv-shows.resource'
 import { SearchService } from '../search.service'
 
@@ -42,6 +43,7 @@ export class SearchMoviesComponent implements OnInit, OnDestroy {
     private movieResource: MovieResource,
     private tvShowResource: TvShowResource,
     private fb: UntypedFormBuilder,
+    private router: Router,
     private searchService: SearchService,
     private scrollActionsService: ScrollActionsService,
     private movieTvShowMapper: MovieTvShowMapper
@@ -56,6 +58,14 @@ export class SearchMoviesComponent implements OnInit, OnDestroy {
   }
 
   public ngOnInit(): void {
+    // TODO: UNSUB
+    const routingSubscription = this.router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        this.scrollActionsService.scrollToTop()
+        this.searchService.evaluateDataClearing(event.url)
+      }
+    })
+
     this.buildSearchForm()
     this.watchResultChanges()
   }

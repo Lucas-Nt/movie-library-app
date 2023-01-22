@@ -1,35 +1,31 @@
 // TODO: check if needed?
-@import "../../../assets/styles/theme.scss";
-
+@import '../../../assets/styles/theme.scss';
 
 .movie-detail-wrapper {
-
   .movie-details-top {
     z-index: 5;
 
     .movie-header {
       padding: 40px 10px;
 
+      .arrow-back {
+        transform: scale(2.2);
+        position: relative;
+        cursor: pointer;
+        right: 8px;
+      }
+
       h1 {
         text-shadow: 0 0 8px black;
         margin-bottom: 0;
-
-        .arrow-back {
-          transform: scale(2.2);
-          position: relative;
-          right: 7px;
-          cursor: pointer;
-        }
       }
 
       .genre-tags {
         display: flex;
-        padding-left: 30px;
       }
     }
 
     .main-movie-info {
-
       img {
         min-height: 450px;
       }
@@ -41,5 +37,4 @@
       }
     }
   }
-
 }

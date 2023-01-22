@@ -8,9 +8,17 @@ const routes: Routes = [
     loadChildren: () => import('./components/search/search-movies.module').then((m) => m.SearchMoviesModule),
   },
   {
+    path: 'details',
+    loadChildren: () => import('./components/movie-details/movie-details.module').then((m) => m.MovieDetailsModule),
+  },
+  {
     path: 'dashboard',
     loadChildren: () => import('./components/dashboard/dashboard.module').then((m) => m.DashboardModule),
   },
+  // {
+  //   path: '**',
+  //   loadChildren: () => import('./components/not-found/not-found.module').then((m) => m.NotFoundModule),
+  // },
 ]
 
 @NgModule({

@@ -1,30 +1,26 @@
-import { Injectable } from '@angular/core';
-import { Resolve, ActivatedRouteSnapshot } from '@angular/router';
+import { Injectable } from '@angular/core'
+import { ActivatedRouteSnapshot, Resolve } from '@angular/router'
 
-import { MovieResource } from '../search/search-movies.resource';
-import { TvShowResource } from '../search/search-tv-shows.resource';
+import { MovieResource } from '../../shared/resources/search-movies.resource'
+import { TvShowResource } from '../search/search-tv-shows.resource'
 
-import { Observable, forkJoin, of } from 'rxjs';
-import { catchError } from 'rxjs/operators';
-import { HttpErrorResponse } from '@angular/common/http';
+import { HttpErrorResponse } from '@angular/common/http'
+import { forkJoin, Observable, of } from 'rxjs'
+import { catchError } from 'rxjs/operators'
 
-import { SearchType } from 'src/app/shared/enums/search-type.enum';
+import { SearchType } from 'src/app/shared/enums/search-type.enum'
 
-@Injectable({ providedIn: 'root' })
+@Injectable()
 export class MovieDetailsResolver implements Resolve<any> {
+  private searchTypeEnum = SearchType
 
-  private searchTypeEnum = SearchType;
-
-  constructor(private movieResource: MovieResource,
-              private tvShowResource: TvShowResource) {}
+  constructor(private movieResource: MovieResource, private tvShowResource: TvShowResource) {}
 
   resolve(route: ActivatedRouteSnapshot): Observable<any> {
-    const id = route.params.id;
-    const searchTypeParam = route.data['searchType'];
+    const id = route.params.id
+    const searchTypeParam = route.data.searchType
 
-    return searchTypeParam === this.searchTypeEnum.MOVIE
-      ? this.resolveMovieDetails(id)
-      : this.resolveTvShowDetails(id);
+    return searchTypeParam === this.searchTypeEnum.MOVIE ? this.resolveMovieDetails(id) : this.resolveTvShowDetails(id)
   }
 
   private resolveMovieDetails(id: number): Observable<any> {
@@ -32,10 +28,12 @@ export class MovieDetailsResolver implements Resolve<any> {
       this.movieResource.getMovieDetails(id),
       this.movieResource.getMovieCredits(id).pipe(
         catchError((error: HttpErrorResponse) => {
-        console.log(error);
-        return of(null);
-      }))
-    ]);
+          console.log(error)
+
+          return of(null)
+        })
+      ),
+    ])
   }
 
   private resolveTvShowDetails(id: number): Observable<any> {
@@ -43,10 +41,11 @@ export class MovieDetailsResolver implements Resolve<any> {
       this.tvShowResource.getTvShowDetails(id),
       this.tvShowResource.getTvShowCredits(id).pipe(
         catchError((error: HttpErrorResponse) => {
-        console.log(error);
-        return of(null);
-      }))
-    ]);
-  }
+          console.log(error)
 
+          return of(null)
+        })
+      ),
+    ])
+  }
 }

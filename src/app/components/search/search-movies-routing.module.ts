@@ -7,10 +7,6 @@ const routes: Routes = [
     path: '',
     component: SearchMoviesComponent,
   },
-  // {
-  //   path: 'details',
-  //   loadChildren: () => import('./../movie-details/movie-details.module').then((m) => m.MovieDetailsModule),
-  // },
 ]
 
 @NgModule({

@@ -6,25 +6,13 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http'
 import { ReactiveFormsModule } from '@angular/forms'
 import { AppComponent } from './app.component'
 import { AppRoutingModule } from './app.routing.module'
-import { MovieDetailsModule } from './components/movie-details/movie-details.module'
-import { SearchMoviesModule } from './components/search/search-movies.module'
 import { CoreModule } from './core/core.module'
 import { SpinnerInterceptorService } from './core/interceptors/spinner.interceptor'
 import { SharedModule } from './shared/shared.module'
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [
-    BrowserModule,
-    ReactiveFormsModule,
-    HttpClientModule,
-    BrowserAnimationsModule,
-    MovieDetailsModule,
-    SearchMoviesModule,
-    AppRoutingModule,
-    SharedModule,
-    CoreModule,
-  ],
+  imports: [BrowserModule, ReactiveFormsModule, HttpClientModule, BrowserAnimationsModule, AppRoutingModule, SharedModule, CoreModule],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
