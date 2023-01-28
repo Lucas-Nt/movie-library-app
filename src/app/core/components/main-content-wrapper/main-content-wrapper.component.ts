@@ -1,35 +1,32 @@
-import { Component, OnInit, Input, OnDestroy } from '@angular/core';
-import { BackgroundImageService } from '../../services/background-image.service';
-import { Subscription } from 'rxjs';
+import { Component, OnDestroy, OnInit } from '@angular/core'
+import { Subscription } from 'rxjs'
+import { BackgroundImageService } from '../../services/background-image.service'
 
 @Component({
   selector: 'app-main-content-wrapper',
   templateUrl: './main-content-wrapper.component.html',
-  styleUrls: ['./main-content-wrapper.component.scss']
+  styleUrls: ['./main-content-wrapper.component.scss'],
 })
 export class MainContentWrapperComponent implements OnInit, OnDestroy {
-
-  @Input() cssClass: string; // TODO: is this really needed?
-
   public get backgroundImage(): string {
-    return this._backgroundImage;
+    return this._backgroundImage
   }
 
-  private _backgroundImage: string;
-  private _backgroundImageSubscription = new Subscription();
-  private _currentBackgroundImage$ = this.backgroundImageService.currentBackgroundImage;
+  private _backgroundImage: string
+  private _backgroundImageSubscription = new Subscription()
+  private _currentBackgroundImage$ = this.backgroundImageService.currentBackgroundImage
 
-  constructor(private backgroundImageService: BackgroundImageService) { }
+  constructor(private backgroundImageService: BackgroundImageService) {}
 
   ngOnInit(): void {
-    this.backgroundImageService.setBackground();
+    this.backgroundImageService.setBackground()
 
-    this._backgroundImageSubscription = this._currentBackgroundImage$.subscribe(newImage => {
-      this._backgroundImage = newImage;
-    });
+    this._backgroundImageSubscription = this._currentBackgroundImage$.subscribe((newImage) => {
+      this._backgroundImage = newImage
+    })
   }
 
   ngOnDestroy(): void {
-    this._backgroundImageSubscription.unsubscribe();
+    this._backgroundImageSubscription.unsubscribe()
   }
 }
