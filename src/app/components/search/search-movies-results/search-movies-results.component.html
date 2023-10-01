@@ -1,20 +1,17 @@
 <div class="col-sm-12 mt-40 mb-30">
-  <h3 class="text-white mb-0 pl-10 pb-5">
-    Results:
-  </h3>
-  <hr class="purple-hr">
+  <h3 class="text-white mb-0 pl-10 pb-5">Results:</h3>
+  <hr class="purple-hr" />
 </div>
 
 <div class="movie-cards-wrapper pl-20 pr-20">
-
-  <mat-card *ngFor="let movie of results; trackBy: movieTrackBy"
-            class="movie-card mat-elevation-z10 pt-8"
-            (click)="goToDetails(movie.id)"
-            title="{{ movie.title }}">
-
+  <mat-card
+    *ngFor="let movie of results; trackBy: movieTrackBy"
+    class="movie-card mat-elevation-z10 pt-8"
+    (click)="goToDetails(movie.id)"
+    title="{{ movie.title }}"
+  >
     <!-- Header -->
     <mat-card-header class="movie-header pb-8 flex justify-space-between align-items-center">
-
       <!-- Title -->
       <mat-card-title class="fs-17 mb-8 truncate-title">
         {{ movie.title }}
@@ -28,37 +25,31 @@
       <!-- /Year of Release -->
 
       <!-- Movie Rating -->
-      <app-rating-circle [rating]="movie.rating"
-                          [customClass]="'w-65 left-10'">
-      </app-rating-circle>
+      <app-rating-circle [rating]="movie.rating" [customClass]="'w-65 left-10'"> </app-rating-circle>
       <!-- /Movie Rating -->
-
     </mat-card-header>
     <!-- /Header -->
 
     <!-- Movie Poster -->
-    <img *ngIf="hasMovieImage(imgEndpoint+movie.poster); else noMovieImage"
-          class="movie-picture"
-          mat-card-image
-          [src]="imgEndpoint+movie.poster"
-          alt="movie poster">
+    <img
+      *ngIf="hasMovieImage(imgEndpoint + movie.poster); else noMovieImage"
+      class="movie-picture"
+      mat-card-image
+      [src]="imgEndpoint + movie.poster"
+      alt="movie poster"
+    />
     <!-- /Movie Poster -->
 
     <!-- No Image Available -->
     <ng-template #noMovieImage>
-      <img class="movie-picture"
-            mat-card-image
-            src="../../../../assets/images/no-image-available.png"
-            alt="movie poster">
+      <img class="movie-picture" mat-card-image src="../../../../assets/images/no-image-available.png" alt="movie poster" />
     </ng-template>
     <!-- /No Image Available -->
 
     <!-- Brief Summary -->
     <mat-card-content class="movie-description text-light-white">
-      <p>{{ movie.description | truncateText:145 }}</p>
+      <p>{{ movie.description | truncateText : 145 }}</p>
     </mat-card-content>
     <!-- /Brief Summary -->
-
   </mat-card>
-
 </div>

@@ -2,40 +2,35 @@
 <div class="scroll-height"></div>
 
 <div class="flex justify-space-between search-pager-wrapper mt-20">
-
   <!-- Search Input -->
   <div class="col-sm-6 col-md-5 col-md-6">
-    <app-search-movies-input [form]="searchInputForm"
-                             (onSearchKeyUp)="executeSearch($event)"
-                             (onClearInput)="resetInput()">
+    <app-search-movies-input [form]="searchInputForm" (onSearchKeyUp)="executeSearch($event)" (onClearInput)="resetInput()">
     </app-search-movies-input>
   </div>
   <!-- /Search Input -->
 
   <!-- Pager -->
   <div class="col-sm-6 col-md-5 col-lg-6 flex align-items-center justify-flex-end">
-    <mat-paginator *ngIf="resultValue === resultEnum.ShowResults"
-                   class="transparent-background"
-                   [length]="totalResults"
-                   [pageIndex]="currentIndex"
-                   [pageSize]="maxItemsPerPage"
-                   [hidePageSize]="true"
-                   [showFirstLastButtons]="true"
-                   (page)="changePage($event)">
+    <mat-paginator
+      *ngIf="resultValue === resultEnum.ShowResults"
+      class="transparent-background"
+      [length]="totalResults"
+      [pageIndex]="currentIndex"
+      [pageSize]="maxItemsPerPage"
+      [hidePageSize]="true"
+      [showFirstLastButtons]="true"
+      (page)="changePage($event)"
+    >
     </mat-paginator>
   </div>
   <!-- /Pager -->
-
 </div>
 <!-- /Search Input And Pager -->
 
 <div [ngSwitch]="resultValue">
-
   <!-- Results -->
   <div *ngSwitchCase="resultEnum.ShowResults">
-    <app-search-movies-results [results]="results"
-                               [searchType]="searchInputForm.get('searchType').value">
-    </app-search-movies-results>
+    <app-search-movies-results [results]="results" [searchType]="searchInputForm.get('searchType').value"></app-search-movies-results>
   </div>
   <!-- /Results -->
 
@@ -46,16 +41,4 @@
     </div>
   </div>
   <!-- /No Results -->
-
 </div>
-
-
-
-
-
-
-
-
-
-
-
