@@ -1,59 +1,36 @@
-<div class="flex align-items-center"
-     [formGroup]="form">
-
+<div class="flex align-items-center" [formGroup]="form">
   <div class="flex flex-1 p-relative">
-
     <!-- Search Input  -->
-    <mat-form-field class="search-input p-relative"
-                    appearance="outline">
+    <mat-form-field class="search-input p-relative" appearance="outline">
       <mat-label class="text-white">
-        <span *ngIf="form.get('searchType').value === searchTypeEnum.MOVIE; else typeTvShowTitle">
-          Type a movie title
-        </span>
+        <span *ngIf="form.get('searchType').value === searchTypeEnum.MOVIE; else typeTvShowTitle"> Type a movie title </span>
         <ng-template #typeTvShowTitle>
-          <span>
-            Type a tv show title
-          </span>
+          <span> Type a tv show title </span>
         </ng-template>
       </mat-label>
 
-      <input matInput
-             formControlName="title"
-             autocomplete="off">
+      <input matInput formControlName="title" autocomplete="off" />
 
       <mat-icon matSuffix>search</mat-icon>
     </mat-form-field>
     <!-- /Search Input  -->
 
     <!-- Clear Input Button -->
-    <button *ngIf="inputHasValue"
-            class="p-absolute top-15 right-10"
-            (click)="clearInput()"
-            color="primary"
-            mat-raised-button>
+    <button *ngIf="inputHasValue" class="p-absolute top-15 right-10" (click)="clearInput()" color="primary" mat-raised-button>
       Clear
-      <mat-icon class="pl-10"
-                matSuffix>
-        clear
-      </mat-icon>
+      <mat-icon class="clear-icon" matSuffix> clear </mat-icon>
     </button>
     <!-- /Clear Input Button -->
   </div>
 
   <!-- Search Type Radio Buttons -->
-  <mat-radio-group class="flex ml-20"
-                   formControlName="searchType"
-                   aria-label="Select an option">
-    <mat-radio-button color="primary"
-                      value="{{searchTypeEnum.MOVIE}}">
+  <mat-radio-group class="flex ml-20" formControlName="searchType" aria-label="Select an option">
+    <mat-radio-button color="primary" value="{{ searchTypeEnum.MOVIE }}">
       {{ searchTypeEnum.MOVIE }}
     </mat-radio-button>
-    <mat-radio-button color="primary"
-                      class="ml-15"
-                      value="{{searchTypeEnum.TV_SHOW}}">
+    <mat-radio-button color="primary" class="ml-15" value="{{ searchTypeEnum.TV_SHOW }}">
       {{ searchTypeEnum.TV_SHOW }}
     </mat-radio-button>
   </mat-radio-group>
   <!-- /Search Type Radio Buttons -->
-
 </div>

@@ -1,4 +1,4 @@
-@import "./theme.scss";
+@import './theme.scss';
 
 html {
   height: 100%;
@@ -9,12 +9,11 @@ body {
   height: 100%;
   margin: 0;
   background-color: $background-color;
-  font-family: "Roboto";
+  font-family: 'Roboto';
 }
 
 // TODO: create an overrides file to move the styles below
 .sidebar-is-open {
-
   &.sidebar-disabled {
     .sidebar {
       &:after {
@@ -30,7 +29,6 @@ body {
   }
 
   .search-is-sticky {
-
     .scroll-height {
       height: 85px;
     }
@@ -44,7 +42,7 @@ body {
       z-index: 10;
       padding: 12px 0;
       box-shadow: 0 0 19px black;
-      transition: background-color .4s ease;
+      transition: background-color 0.4s ease;
 
       .mat-form-field-wrapper {
         padding-bottom: 0;
@@ -67,7 +65,7 @@ body {
     z-index: 10;
     padding: 12px 0;
     box-shadow: 0 0 19px black;
-    transition: background-color .4s ease;
+    transition: background-color 0.4s ease;
 
     .mat-form-field-wrapper {
       padding-bottom: 0;
@@ -88,6 +86,8 @@ body {
 }
 
 .movie-header {
+  gap: 32px;
+
   .mat-card-header-text {
     margin-left: 0 !important;
     max-width: 70%;
@@ -112,4 +112,3 @@ body {
   margin: 0 !important;
   height: 100%;
 }
-
