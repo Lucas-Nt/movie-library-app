@@ -4,10 +4,12 @@ import { MatDialog } from '@angular/material/dialog'
 import { ActivatedRoute } from '@angular/router'
 import { first } from 'rxjs/operators'
 import { BackgroundImageService } from 'src/app/core/services/background-image.service'
+import { DialogBaseComponent } from 'src/app/shared/components/dialog-base/dialog-base.component'
 import { SearchType } from 'src/app/shared/enums/search-type.enum'
 import { MovieTvShowMapper } from 'src/app/shared/mappers/movie-tv-show.mapper'
 import { POSTER_BASE_URL } from 'src/app/shared/utilities/resource-utilities'
 import { MovieDetailsService } from './movie-details.service'
+import { TrailerModalComponent } from './trailer-modal/trailer-modal.component'
 
 @Component({
   selector: 'app-movie-details',
@@ -41,15 +43,13 @@ export class MovieDetailsComponent implements OnInit, OnDestroy {
   }
 
   public openTrailerDialog(key: string): void {
-    console.log(key)
-    alert('should open dialog! implementation pending!')
-    // this.dialog.open(DialogBaseComponent, {
-    //   data: {
-    //     component: TrailerModalComponent
-    //   },
-    //   width: '60%',
-    //   height: '60%'
-    // });
+    this.dialog.open(DialogBaseComponent, {
+      data: {
+        component: TrailerModalComponent,
+      },
+      width: '60%',
+      height: '60%',
+    })
   }
 
   private subscribeToRouteData() {
